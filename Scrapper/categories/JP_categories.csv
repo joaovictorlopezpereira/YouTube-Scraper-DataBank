@@ -1,0 +1,32 @@
+category_id,category_name,assignable
+1,Film & Animation,True
+2,Autos & Vehicles,True
+10,Music,True
+15,Pets & Animals,True
+17,Sports,True
+18,Short Movies,False
+19,Travel & Events,True
+20,Gaming,True
+21,Videoblogging,False
+22,People & Blogs,True
+23,Comedy,True
+24,Entertainment,True
+25,News & Politics,True
+26,Howto & Style,True
+27,Education,True
+28,Science & Technology,True
+30,Movies,False
+31,Anime/Animation,False
+32,Action/Adventure,False
+33,Classics,False
+34,Comedy,False
+35,Documentary,False
+36,Drama,False
+37,Family,False
+38,Foreign,False
+39,Horror,False
+40,Sci-Fi/Fantasy,False
+41,Thriller,False
+42,Shorts,False
+43,Shows,False
+44,Trailers,False
