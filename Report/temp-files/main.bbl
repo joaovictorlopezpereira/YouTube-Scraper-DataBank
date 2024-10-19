@@ -1,0 +1,139 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{youtube}{online}{}
+      \name{author}{1}{}{%
+        {{hash=d84b8ea2b101f63001517ed1acaf4902}{%
+           family={Inc.},
+           familyi={I\bibinitperiod},
+           given={Alphabet},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{d84b8ea2b101f63001517ed1acaf4902}
+      \strng{fullhash}{d84b8ea2b101f63001517ed1acaf4902}
+      \strng{bibnamehash}{d84b8ea2b101f63001517ed1acaf4902}
+      \strng{authorbibnamehash}{d84b8ea2b101f63001517ed1acaf4902}
+      \strng{authornamehash}{d84b8ea2b101f63001517ed1acaf4902}
+      \strng{authorfullhash}{d84b8ea2b101f63001517ed1acaf4902}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{8 de Fevereiro de 2008}
+      \field{note}{Acessado em 11 de Outubro de 2024}
+      \field{title}{Youtube}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.youtube.com
+      \endverb
+      \verb{url}
+      \verb https://www.youtube.com
+      \endverb
+    \endentry
+    \entry{kaggle}{online}{}
+      \name{author}{1}{}{%
+        {{hash=11bb1d2fc83a61c4b40b81c2f83149db}{%
+           family={LLC},
+           familyi={L\bibinitperiod},
+           given={Google},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{11bb1d2fc83a61c4b40b81c2f83149db}
+      \strng{fullhash}{11bb1d2fc83a61c4b40b81c2f83149db}
+      \strng{bibnamehash}{11bb1d2fc83a61c4b40b81c2f83149db}
+      \strng{authorbibnamehash}{11bb1d2fc83a61c4b40b81c2f83149db}
+      \strng{authornamehash}{11bb1d2fc83a61c4b40b81c2f83149db}
+      \strng{authorfullhash}{11bb1d2fc83a61c4b40b81c2f83149db}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Abril de 2010}
+      \field{note}{Acessado em 12 de Outubro de 2024}
+      \field{title}{Kaggle}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.kaggle.com/datasets/datasnaek/youtube-new
+      \endverb
+      \verb{url}
+      \verb https://www.kaggle.com/datasets/datasnaek/youtube-new
+      \endverb
+    \endentry
+    \entry{mitchelljy}{online}{}
+      \name{author}{1}{}{%
+        {{hash=436a7fb1488d92879c19a527ac149f6c}{%
+           family={mitchelljy},
+           familyi={m\bibinitperiod}}}%
+      }
+      \strng{namehash}{436a7fb1488d92879c19a527ac149f6c}
+      \strng{fullhash}{436a7fb1488d92879c19a527ac149f6c}
+      \strng{bibnamehash}{436a7fb1488d92879c19a527ac149f6c}
+      \strng{authorbibnamehash}{436a7fb1488d92879c19a527ac149f6c}
+      \strng{authornamehash}{436a7fb1488d92879c19a527ac149f6c}
+      \strng{authorfullhash}{436a7fb1488d92879c19a527ac149f6c}
+      \field{sortinit}{m}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{29 de Novembro de 2018}
+      \field{note}{Acessado em 28 de Setembro de 2024}
+      \field{title}{Trending YouTube Scraper}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://github.com/mitchelljy/Trending-YouTube-Scraper/tree/master
+      \endverb
+      \verb{url}
+      \verb https://github.com/mitchelljy/Trending-YouTube-Scraper/tree/master
+      \endverb
+    \endentry
+    \entry{socialblade}{online}{}
+      \name{author}{1}{}{%
+        {{hash=40f8234f4bdbddacf0a3690eab3fea4e}{%
+           family={Urgo},
+           familyi={U\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{40f8234f4bdbddacf0a3690eab3fea4e}
+      \strng{fullhash}{40f8234f4bdbddacf0a3690eab3fea4e}
+      \strng{bibnamehash}{40f8234f4bdbddacf0a3690eab3fea4e}
+      \strng{authorbibnamehash}{40f8234f4bdbddacf0a3690eab3fea4e}
+      \strng{authornamehash}{40f8234f4bdbddacf0a3690eab3fea4e}
+      \strng{authorfullhash}{40f8234f4bdbddacf0a3690eab3fea4e}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{8 de Fevereiro de 2008}
+      \field{note}{Acessado em 11 de Outubro de 2024}
+      \field{title}{Social Blade}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://socialblade.com/
+      \endverb
+      \verb{url}
+      \verb https://socialblade.com/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
