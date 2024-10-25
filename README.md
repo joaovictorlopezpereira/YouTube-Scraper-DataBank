@@ -1,4 +1,4 @@
-# -Youtube-Scrapper-DataBank
+# -Youtube-Scraper-DataBank
 
 This repository is dedicated to the final project of the "Databases 1" course at the Federal University of Rio de Janeiro.
 
