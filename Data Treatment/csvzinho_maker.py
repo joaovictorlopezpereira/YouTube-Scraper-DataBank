@@ -24,6 +24,7 @@ def csv_canal_table(df):
 
 def csv_pais_table(df):
   pais = df[['channel_country']]
+  pais = pais.drop_duplicates()
   pais.columns = ['Codigo']
   pais.to_csv('csvzinhos/pais.csv', index=False)
   return;
