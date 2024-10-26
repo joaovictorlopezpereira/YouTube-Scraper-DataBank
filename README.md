@@ -1,6 +1,6 @@
 # Youtube-Scraper-DataBank
 
-This repository is dedicated to the final project of the "Databases 1" course at the Federal University of Rio de Janeiro.
+This repository is dedicated to the final project of the "Databases 1" course at the Federal University of Rio de Janeiro (UFRJ).
 
 It contains a Conceptual Entity-Relationship Diagram (ERD), a Logical diagram, and includes a Physical implementation in MySQL for a database that stores information about trending YouTube videos.
 
