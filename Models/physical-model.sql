@@ -1,9 +1,7 @@
-```/* logic-model: */
-
 CREATE TABLE Video (
     ID CHAR(11) PRIMARY KEY,
     Canal_ID CHAR(24),
-    Data_hora_de_publicacao DATETIME,
+    Data_hora_de_publicacao DATE,
     Categoria_ID INT
 );
 
@@ -18,15 +16,15 @@ CREATE TABLE Canal (
 );
 
 CREATE TABLE Pais (
-    Codigo CHAR(2) PRIMARY KEY
+    Codigo CHAR(3) PRIMARY KEY
 );
 
 CREATE TABLE Video_Snapshot (
     Titulo VARCHAR(100),
-    Numero_de_likes INT,
-    Numero_de_visualizacoes INT,
+    Numero_de_likes BIGINT,
+    Numero_de_visualizacoes BIGINT,
     Descricao TEXT,
-    Numero_de_comentarios INT,
+    Numero_de_comentarios BIGINT,
     Data DATE,
     Video_ID CHAR(11),
     PRIMARY KEY (Data, Video_ID)
@@ -37,31 +35,31 @@ CREATE TABLE Canal_Snapshot (
     Numero_de_videos INT,
     Descricao TEXT,
     Imagem_de_perfil TEXT,
-    Numero_de_visualizacoes INT,
+    Numero_de_visualizacoes BIGINT,
     Link TEXT,
-    Numero_de_inscritos INT,
+    Numero_de_inscritos BIGINT,
     Data DATE,
     Canal_ID CHAR(24),
-    Pais_codigo CHAR(2),
+    Pais_Codigo CHAR(3),
     PRIMARY KEY (Data, Canal_ID)
 );
 
 CREATE TABLE Tag (
     Video_ID CHAR(11) NOT NULL,
-    Tag TEXT,
+    Tag VARCHAR(500), -- Total limit of 500 characters of all tags for each video
     Video_Snapshot_Data DATE,
     PRIMARY KEY (Video_ID, Tag, Video_Snapshot_Data)
 );
 
-CREATE TABLE Palavras_chave (
+CREATE TABLE Palavra_chave (
     Canal_ID CHAR(24) NOT NULL,
-    Palavras_chave TEXT,
+    Palavra_chave VARCHAR(500), -- Total limit of 500 characters of all keywords for each channel
     Canal_Snapshot_Data DATE,
-    PRIMARY KEY (Canal_ID, Palavras_chave, Canal_Snapshot_Data)
+    PRIMARY KEY (Canal_ID, Palavra_chave, Canal_Snapshot_Data)
 );
 
 CREATE TABLE Trend (
-    Pais_Codigo CHAR(2),
+    Pais_Codigo CHAR(3),
     Video_ID CHAR(11),
     Video_Snapshot_Data DATE,
     PRIMARY KEY (Pais_Codigo, Video_ID, Video_Snapshot_Data)
@@ -102,12 +100,12 @@ ALTER TABLE Tag ADD CONSTRAINT FK_Tag_Video_Snapshot_Data
     REFERENCES Video_Snapshot (Data)
     ON DELETE CASCADE;
 
-ALTER TABLE Palavras_chave ADD CONSTRAINT FK_Palavras_chave_Canal_Snapshot_Data
+ALTER TABLE Palavra_chave ADD CONSTRAINT FK_Palavra_chave_Canal_Snapshot_Data
     FOREIGN KEY (Canal_Snapshot_Data)
     REFERENCES Canal_Snapshot (Data)
     ON DELETE CASCADE;
 
-ALTER TABLE Palavras_chave ADD CONSTRAINT FK_Palavras_chave_Canal_ID
+ALTER TABLE Palavra_chave ADD CONSTRAINT FK_Palavra_chave_Canal_ID
     FOREIGN KEY (Canal_ID)
     REFERENCES Canal_Snapshot (Canal_ID)
     ON DELETE CASCADE;
