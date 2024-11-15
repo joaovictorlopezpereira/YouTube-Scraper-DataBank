@@ -13,7 +13,7 @@ WITH
 					Video AS V ON UDA.ID = V.ID JOIN
 						Video_Snapshot AS VS ON V.ID = VS.Video_ID AND
 												UDA.Ultima_data = VS.Data)
-SELECT DISTINCT CS.Titulo, VR.Total_de_visualizacoes
+SELECT DISTINCT CS.Titulo AS Canal, VR.Total_de_visualizacoes
 FROM (SELECT Canal_ID, SUM(Numero_de_visualizacoes) AS Total_de_visualizacoes
 	  FROM Video_mais_recente
       GROUP BY Canal_ID) AS VR JOIN
@@ -21,12 +21,12 @@ FROM (SELECT Canal_ID, SUM(Numero_de_visualizacoes) AS Total_de_visualizacoes
 ORDER BY VR.Total_de_visualizacoes DESC;
 
 /*
->> Canal que ficou no em alta mais vezes
+>> Canais que ficaram no em alta mais vezes
 Exibe, em ordem decrescente, os canais que mais apareceram no Em Alta e a quantidade
 de vezes que isso aconteceu. Consideramos como aparição cada ocorrência de um vídeo do
 canal no Em Alta de um país em uma data.
 */
-SELECT CS.Titulo, COUNT(CS.Canal_ID) AS Numero_de_vezes_no_Trend
+SELECT CS.Titulo AS Canal, COUNT(CS.Canal_ID) AS Numero_de_vezes_no_Trend
 FROM Trend AS T JOIN
 		Video_Snapshot AS VS ON T.Video_ID = VS.Video_ID AND
 								T.Video_Snapshot_Data = VS.Data JOIN
@@ -81,17 +81,13 @@ WITH
 					Canal AS C ON CS.Canal_ID = C.ID JOIN
 						Video AS V ON C.ID = V.Canal_ID JOIN
 							Video_Snapshot AS VS ON V.ID = VS.Video_ID AND
-													CS.Data = VS.Data),
-	Nulos_em_alta AS
-		(SELECT NULL AS Codigo, COUNT(*) AS Numero_de_aparicoes
-         FROM Paises_em_alta
-         WHERE Codigo IS NULL)
-(SELECT Codigo AS Pais, COUNT(Codigo) AS Numero_de_aparicoes
-FROM Paises_em_alta
-WHERE Codigo IS NOT NULL
-GROUP BY Codigo
-UNION
-SELECT NULL AS Codigo, COUNT(*) AS Numero_de_aparicoes
-FROM Paises_em_alta
-WHERE Codigo IS NULL)
+													CS.Data = VS.Data)
+(SELECT Codigo AS Pais_sede, COUNT(Codigo) AS Numero_de_aparicoes
+ FROM Paises_em_alta
+ WHERE Codigo IS NOT NULL
+ GROUP BY Codigo
+ UNION
+ SELECT NULL AS Pais_sede, COUNT(*) AS Numero_de_aparicoes
+ FROM Paises_em_alta
+ WHERE Codigo IS NULL)
 ORDER BY Numero_de_aparicoes DESC;
