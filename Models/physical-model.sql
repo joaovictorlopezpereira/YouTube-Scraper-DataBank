@@ -1,7 +1,7 @@
 CREATE TABLE Video (
     ID CHAR(11) PRIMARY KEY,
     Canal_ID CHAR(24),
-    Data_hora_de_publicacao DATE,
+    Data_de_publicacao DATE, 
     Categoria_ID INT
 );
 
@@ -16,7 +16,7 @@ CREATE TABLE Canal (
 );
 
 CREATE TABLE Pais (
-    Codigo CHAR(3) PRIMARY KEY
+    Codigo CHAR(2) PRIMARY KEY
 );
 
 CREATE TABLE Video_Snapshot (
@@ -40,7 +40,7 @@ CREATE TABLE Canal_Snapshot (
     Numero_de_inscritos BIGINT,
     Data DATE,
     Canal_ID CHAR(24),
-    Pais_Codigo CHAR(3),
+    Pais_Codigo CHAR(2),
     PRIMARY KEY (Data, Canal_ID)
 );
 
@@ -59,7 +59,7 @@ CREATE TABLE Palavra_chave (
 );
 
 CREATE TABLE Trend (
-    Pais_Codigo CHAR(3),
+    Pais_Codigo CHAR(2),
     Video_ID CHAR(11),
     Video_Snapshot_Data DATE,
     PRIMARY KEY (Pais_Codigo, Video_ID, Video_Snapshot_Data)
@@ -124,3 +124,14 @@ ALTER TABLE Trend ADD CONSTRAINT FK_Trend_Video_Snapshot_Data
     FOREIGN KEY (Video_Snapshot_Data)
     REFERENCES Video_Snapshot (Data)
     ON DELETE RESTRICT;
+
+DELIMITER $$
+CREATE TRIGGER NULLIF_CANAL_SNAPSHOT_COUNTRY
+BEFORE INSERT ON canal_snapshot
+FOR EACH ROW
+BEGIN
+	IF NEW.Pais_Codigo = 'ZZ' then
+		SET NEW.Pais_Codigo = NULL;
+	END IF;
+END $$
+DELIMITER ;
