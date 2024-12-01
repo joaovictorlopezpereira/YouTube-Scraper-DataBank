@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+  <h1 id="title"> Título Legal </h1>
+  <form id="form" action="/consultas" method="POST">
+    <select name="consultas" id="consultas">
+      <option value="consulta0">Selecione uma consulta</option>
+      <option value="consulta1">Videos em alta de um canal</option>
+      <option value="consulta2">Video em alta em um pais</option>
+      <option value="consulta3">Palavras chave mais utilizadas</option>
+      <option value="consulta4">Tags mais utilizadas</option>
+      <option value="consulta5">Tags com mais visualizações</option>
+      <option value="consulta6">Views por categoria</option>
+      <option value="consulta7">Views por canal</option>
+      <option value="consulta8">Likes por categoria</option>
+      <option value="consulta9">Aparições em alta por categoria</option>
+      <option value="consulta10">Categorias dos videos em alta por canal</option>
+      <option value="consulta11">Aparições de um canal por país</option>
+      <option value="consulta12">Aparições de países no em alta</option>
+      <option value="consulta13">Aparições no em alta por canal</option>
+      <option value="consulta14">Canais que já apareceram no em alta</option>
+    </select>
+    <input type="text" name="filtro1">
+    <input type="text" name="filtro2">
+    <button type="submit"> Clique em mim! </button>
+  </form>
+  </div>
+  <script src="scripts.js"></script>
+</body>
+</html>

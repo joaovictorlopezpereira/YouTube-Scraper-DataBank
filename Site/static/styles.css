@@ -1,0 +1,58 @@
+#container {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#teste {
+  color: brown;
+}
+
+#title {
+  font-size: 50px;
+  text-align: center;
+}
+
+#form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+select {
+  width: 380px;
+  height: 40px;
+  margin: 10px;
+  font-size: 23px;
+}
+
+input {
+  width: 371px;
+  height: 36px;
+  margin: 10px;
+  font-size: 23px;
+}
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #39adc2; /* Cor de fundo do botão */
+  color: white; /* Cor do texto */
+  text-align: center; /* Centralizar o texto */
+  text-decoration: none; /* Remove o sublinhado do link */
+  border-radius: 5px; /* Cantos arredondados */
+  font-size: 16px; /* Tamanho da fonte */
+  cursor: pointer; /* Altera o cursor para um ponteiro */
+  border: 2px solid transparent; /* Borda invisível */
+  border-bottom: 5px;
+  transition: background-color 0.3s; /* Efeito de transição */
+}
+button:hover {
+  background-color: #33359e; /* Cor do botão quando passa o mouse */
+}
+button:active {
+  background-color: #351f96; /* Cor do botão quando clicado */
+}

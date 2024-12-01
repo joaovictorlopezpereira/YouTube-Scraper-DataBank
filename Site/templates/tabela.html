@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='tablestyle.css') }}">
+    <title>Resultado da Consulta</title>
+</head>
+<body>
+    <div class="table_box">
+    <h1>Tabela Resultante</h1>
+    <a href="http://127.0.0.1:5000/grafico" class="botao-link"> Gerar gráfico </a>
+    {% if tabela %}
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for chave in tabela[0].keys() %}
+                        <th>{{ chave }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for linha in tabela %}
+                    <tr>
+                        {% for valor in linha.values() %}
+                            <td>{{ valor }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+    </div>
+</body>
+</html>

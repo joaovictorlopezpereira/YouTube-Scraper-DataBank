@@ -1,0 +1,56 @@
+.table_box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  margin: 20px;
+}
+
+td, th {
+  font-size: 22px;
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: center;
+  width: 100px;
+  height: 20px;
+  max-width: 210px;
+  max-height: 35px;
+  padding: 5px;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.botao-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #39adc2; /* Cor de fundo do botão */
+  color: white; /* Cor do texto */
+  text-align: center; /* Centralizar o texto */
+  text-decoration: none; /* Remove o sublinhado do link */
+  border-radius: 5px; /* Cantos arredondados */
+  font-size: 16px; /* Tamanho da fonte */
+  cursor: pointer; /* Altera o cursor para um ponteiro */
+  border: 2px solid transparent; /* Borda invisível */
+  border-bottom: 5px;
+  transition: background-color 0.3s; /* Efeito de transição */
+}
+.botao-link:hover {
+  background-color: #33359e; /* Cor do botão quando passa o mouse */
+}
+.botao-link:active {
+  background-color: #351f96; /* Cor do botão quando clicado */
+}
+
+tr:nth-child(even) {
+  background-color: #a0c2d8;
+}
+
+.table_name {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
