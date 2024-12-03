@@ -6,8 +6,36 @@
   flex-direction: column;
 }
 
-#teste {
-  color: brown;
+header {
+  min-width: 1060px;
+  background-color: rgb(5, 21, 107);
+}
+header nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  color: aliceblue;
+}
+header nav ul li a {
+  margin: 0.5em;
+  text-decoration: none;
+  display: block;
+  font-size: 1.5em;
+  padding: 0.5em;
+  border: 1px aliceblue solid;
+  border-radius: 50px;
+  transition: background-color 0.2s;
+}
+header nav ul li a:visited {
+  color: aliceblue;
+}
+header nav ul li a:hover {
+  color: rgb(5, 21, 107);
+  background-color: aliceblue;
+}
+
+h3 {
+  margin-top: 0px;
 }
 
 #title {
@@ -24,16 +52,24 @@
 
 select {
   width: 380px;
-  height: 40px;
+  height: 45px;
   margin: 10px;
   font-size: 23px;
+  border-radius: 5px;
 }
 
 input {
   width: 371px;
-  height: 36px;
+  height: 40px;
   margin: 10px;
   font-size: 23px;
+  border-radius: 5px;
+  border: 0.5px solid rgb(116, 116, 116);
+  display: none;
+}
+
+input:hover {
+  background-color: rgb(231, 238, 238);
 }
 
 button {

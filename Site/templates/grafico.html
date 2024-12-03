@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='tablestyle.css') }}">
     <title>Exemplo de Gráfico</title>
 </head>
 <body>
+    <header>
+        <nav><ul>
+            <li id="auto"><a href="../">&#9668; Consulta</a></li>
+            </ul>
+        </nav>
+    </header>
     <h1>Gráfico Gerado com Flask</h1>
     <img src="/plot" alt="Gráfico">
 </body>

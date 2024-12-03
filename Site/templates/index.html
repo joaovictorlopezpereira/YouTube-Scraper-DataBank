@@ -7,12 +7,18 @@
   <title>Document</title>
 </head>
 <body>
+  <header>
+    <nav><ul>
+        </ul>
+    </nav>
+</header>
   <div id="container">
-  <h1 id="title"> Título Legal </h1>
+  <h1 id="title"> Youtube Scraper </h1>
+  <h3><i>Foram coletados dados de 34 dias. Último dia: 29/11/2024</i></h3>
   <form id="form" action="/consultas" method="POST">
     <select name="consultas" id="consultas">
       <option value="consulta0">Selecione uma consulta</option>
-      <option value="consulta1">Videos em alta de um canal</option>
+      <option value="consulta1" onclick="aciona()">Videos em alta de um canal</option>
       <option value="consulta2">Video em alta em um pais</option>
       <option value="consulta3">Palavras chave mais utilizadas</option>
       <option value="consulta4">Tags mais utilizadas</option>
@@ -27,11 +33,11 @@
       <option value="consulta13">Aparições no em alta por canal</option>
       <option value="consulta14">Canais que já apareceram no em alta</option>
     </select>
-    <input type="text" name="filtro1">
-    <input type="text" name="filtro2">
+    <input type="text" name="filtro1" id="filtro1" placeholder="Digite aqui...">
+    <input type="text" name="filtro2" id="filtro2">
     <button type="submit"> Clique em mim! </button>
   </form>
   </div>
-  <script src="scripts.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

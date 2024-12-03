@@ -3,6 +3,7 @@ import mysql.connector
 import matplotlib.pyplot as plt
 import io
 
+#opções do select mapeadas para suas respectivas querys no SQL
 consultas = {
     "consulta1":  
 ''' 
@@ -203,13 +204,32 @@ ORDER BY Numero_de_inscritos DESC;
 '''
 }
 
+#opções do select mapeadas para seus respectivos nomes
+nome_tabela = {
+     "consulta1": "Vídeos em alta de um canal",
+     "consulta2": "Vídeos em alta em um país",
+     "consulta3": "Palavras chaves mais utilizadas",
+     "consulta4": "Tags mais utilizadas",
+     "consulta5": "Tags com mais visualizações",
+     "consulta6": "Views por categoria",
+     "consulta7": "Views por canal",
+     "consulta8": "Likes por categoria",
+     "consulta9": "Aparições em alta por categoria",
+     "consulta10": "Categorias dos vídeos em alta por canal",
+     "consulta11": "Aparições de um canal por país",
+     "consulta12": "Aparições de países no em alta",
+     "consulta13": "Aparições no em alta por canal",
+     "consulta14": "Canais que já apareceram no em alta"
+}
+
 app = Flask(__name__)
 
+#configurações iniciais para funcionamento do banco de dados
 db_config = {
-    'host': 'localhost',       # Substitua pelo endereço do seu servidor MySQL
-    'user': 'root',     # Substitua pelo seu usuário MySQL
-    'password': 'YuTeJh321',   # Substitua pela sua senha MySQL
-    'database': 'youtube'      # Substitua pelo nome do banco de dados
+    'host': 'localhost',       #Substitua pelo endereço do seu servidor MySQL
+    'user': 'root',     #Substitua pelo seu usuário MySQL
+    'password': 'YuTeJh321',   #Substitua pela sua senha MySQL
+    'database': 'youtube'      #Substitua pelo nome do banco de dados
 }
 
 global_xs = None
@@ -217,6 +237,7 @@ global_ys = None
 global_tabela = None
 plt.switch_backend('agg')
 
+#usa a variável global da tabela para separar os valores em duas listas, que se tornam eixos do gráfico a ser plotado
 def faz_eixos():
      eixo_x = list(global_tabela[0].keys())[0][0:25]
      eixo_y = list(global_tabela[0].keys())[1][0:25]
@@ -224,54 +245,61 @@ def faz_eixos():
      ys = [element[eixo_y] for element in global_tabela]
      return xs, ys
 
+#envia o gráfico gerado no python para a página html
 @app.route('/grafico')
 def gera_grafico():
      buf = faz_grafico()
      return send_file(buf, mimetype='image/png')
 
+#usa os eixos feitos pela função faz_eixos() para construir o gráfico da tabela em questão
 def faz_grafico():
      xs, ys = faz_eixos()
      plt.figure(figsize=(20, 15)) 
      plt.barh(xs, ys)
      plt.title(f'{list(global_tabela[0].keys())[0]} x {list(global_tabela[0].keys())[1]}')
-     plt.xlabel(list(global_tabela[0].keys())[0])
-     plt.ylabel(list(global_tabela[0].keys())[1])
+     plt.xlabel(list(global_tabela[0].keys())[1])
+     plt.ylabel(list(global_tabela[0].keys())[0])
      plt.legend()
-
-    
      buf = io.BytesIO()
      plt.savefig(buf, format='png')
      buf.seek(0)
      plt.close()
      return buf
 
+#renderiza a página do menu
 @app.route('/')
 def index():
      return render_template("index.html")
 
+#filtra a consulta apropriada através do input do usuário e então gera o gráfico, se houver
 @app.route('/consultas', methods=['POST'])
 def processar():
-     dado = request.form['consultas']
-     filtro1 = request.form["filtro1"]
-     consulta = consultas[dado]
-     conn = mysql.connector.connect(**db_config)
-     cursor = conn.cursor(dictionary=True)
-     if dado == 'consulta2':
-          cursor.execute(f'SET @Data_buscada = "{filtro1}";')
-          cursor.execute(f'SET @Pais_buscado = "{request.form["filtro2"]}";')
-     elif dado == 'consulta1' or dado == 'consulta10' or dado == 'consulta11':
-          cursor.execute(f'SET @Canal_buscado = "{filtro1}";')
-     elif dado == 'consulta5':
-          cursor.execute(f'SET @Categoria_buscada = "{filtro1}";')
-     consulta = consulta[0:len(consulta) - 2] + ' LIMIT 50;'
-     print(consulta)
-     cursor.execute(consulta)
-     tabela = cursor.fetchall()
-     cursor.close()
-     conn.close()
-     global global_tabela
-     global_tabela = tabela
-     gera_grafico()
-     return render_template('tabela.html', tabela=tabela)
+     try:
+          dado = request.form['consultas']
+          filtro1 = request.form["filtro1"]
+          consulta = consultas[dado]
+          conn = mysql.connector.connect(**db_config)
+          cursor = conn.cursor(dictionary=True)
+          if dado == 'consulta2':
+               cursor.execute(f'SET @Data_buscada = "{filtro1}";')
+               cursor.execute(f'SET @Pais_buscado = "{request.form["filtro2"]}";')
+          elif dado == 'consulta1' or dado == 'consulta10' or dado == 'consulta11':
+               cursor.execute(f'SET @Canal_buscado = "{filtro1}";')
+          elif dado == 'consulta5':
+               cursor.execute(f'SET @Categoria_buscada = "{filtro1}";')
+          consulta = consulta[0:len(consulta) - 2] + ' LIMIT 50;'
+          print(consulta)
+          cursor.execute(consulta)
+          tabela = cursor.fetchall()
+          cursor.close()
+          conn.close()
+          if dado in ['consulta3', 'consulta4', 'consulta5', 'consulta6', 'consulta7', 'consulta8', 'consulta9', 'consulta10', 'consulta11', 'consulta13']:
+               global global_tabela
+               global_tabela = tabela
+               gera_grafico()
+          return render_template('tabela.html', tabela=tabela, consulta=dado, nome_tabela=nome_tabela[dado])
+     except:
+          return render_template('tabela.html', tabela=[{}], consulta='', nome_tabela='')
+     
 if __name__ == "__main__":
   app.run()
