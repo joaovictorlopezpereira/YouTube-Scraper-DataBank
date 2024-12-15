@@ -7,7 +7,6 @@
 
 %->8--------Referencing-and-Figures-Packages-and-Commands-------8<-%
 \usepackage{tocloft}
-\usepackage{hyperref}
 \usepackage{csquotes}
 \usepackage[backend=biber, maxnames=99]{biblatex}
 \usepackage{graphicx}
@@ -30,6 +29,13 @@
 \setlength{\cftbeforesecskip}{6pt}        % Espaçamento antes das seções na TOC
 %->8------------------------------------------------------------8<-%
 
+% Loading hyperref last avoids some warnings, which are due to some
+% redefinitions of commands, according to
+% https://tex.stackexchange.com/questions/18924/pdftex-warning-ext4-destination-with-the-same-identifier-nam-epage-1-has
+
+%->8-------Referencing-and-Figures-Again------------------------8<-%
+\usepackage{hyperref}
+%->8------------------------------------------------------------8<-%
 
 %->8-------------------Title-Related-Commands-------------------8<-%
 \title{ Relatório do Trabalho Final de Banco de Dados}
