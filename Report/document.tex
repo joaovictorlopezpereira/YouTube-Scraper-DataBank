@@ -56,13 +56,11 @@
     \caption{Modelagem Conceitual do \nonport{Dataset} utilizado.}
   \end{figure}
 
-  \todo{Gustavo: Nessa seção, não discutimos a entidade Vídeo, sem Snapshot, em momento algum}
-
   O foco da nossa modelagem está em capturar o estado temporal de canais e vídeos \emph{em alta}. As entidades principais são o \var{Canal Snapshot} e o \var{Vídeo Snapshot}, que representam ``fotografias'' do estado de um canal e de um vídeo em um momento específico.
 
   O \var{Canal Snapshot} armazena informações temporais sobre um canal, como número de visualizações, inscritos, palavras-chave, título, número de vídeos, data da \nonport{snapshot}, \nonport{link}, descrição e imagem de perfil. Cada \var{Canal Snapshot} está associado a um \var{País}, o que permite registrar as características do canal em um contexto geográfico específico. Essa abordagem nos permite acompanhar a evolução e a presença do canal em diferentes regiões ao longo do tempo.
 
-  Por outro lado, a entidade \var{Vídeo Snapshot} captura o estado de um vídeo em uma data específica, incluindo atributos como título, número de comentários, data, descrição, número de visualizações e número de likes. Essa estrutura é essencial para registrar a popularidade do vídeo exclusivamente na data em que ele se torna viral ou aparece no \emph{Em Alta}. A entidade \var{Trend} conecta cada \var{Vídeo Snapshot} a um \var{País}, representando os momentos em que o vídeo esteve em destaque em uma região específica, possibilitando uma análise detalhada de sua trajetória de popularidade.
+  Por outro lado, a entidade \var{Vídeo Snapshot} captura o estado de um vídeo em uma data específica, incluindo atributos como título, número de comentários, data, descrição, número de visualizações e número de likes. Essa estrutura é essencial para registrar a popularidade do vídeo exclusivamente na data em que ele se torna viral ou aparece no \emph{Em Alta}. A entidade \var{Trend} conecta cada \var{Vídeo Snapshot} a um \var{País}, representando os momentos em que o vídeo esteve em destaque em uma região específica, possibilitando uma análise detalhada de sua trajetória de popularidade. Para armazenar os dados atemporais de um vídeo (por exemplo, associá-lo ao canal que o publica, ou definir a sua categoria), cada \var{Vídeo Snapshot} está associado a uma entidade \var{Vídeo}.
 
   Além disso, a modelagem inclui a entidade \var{Canal}, que representa o canal original que publica os vídeos e possui atributos fixos, como ID e data de criação. Cada vídeo é publicado por um canal e é classificado em uma \var{Categoria} (como \var{Gaming} ou \var{Comedy}, por exemplo), que permanece inalterada ao longo do tempo.
 
