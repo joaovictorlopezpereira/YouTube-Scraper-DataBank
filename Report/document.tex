@@ -655,19 +655,42 @@ ORDER BY VR.Total_de_visualizacoes DESC;
 
 \chapter{Distribuição do trabalho}
 
-   Inicialmente, os membros do grupo se reuniram para debater a modelagem conceitual para o tema proposto e, após diversos protótipos, Gustavo encontrou uma solução plausível para o modelagem sobre o tratamento da questão temporal dos nossos dados. 
-   
-   Em seguida, João Victor tratou da implementação do modelo conceitual no \nonport{BrModelo} e, junto de William Victor, realizaram a conversão para o modelo lógico e, em seguida, para o modelo físico. De forma quase assíncrona, Yuri e William Victor implementaram o programa que extraísse e tratasse os dados do \nonport{YouTube}.
+   Inicialmente, os membros do grupo se reuniram para debater a modelagem conceitual para o tema proposto e, após diversos
+   protótipos, foi encontrada uma solução plausível para a modelagem. Em seguida, João Victor tratou da implementação do
+   modelo conceitual no \nonport{BrModelo}.
 
-   As consultas foram realizadas por William Victor.
+   No entanto, após a rodada inicial de apresentações,
+   se tornou evidente por meio do \nonport{feedback} obtido que a modelagem conceitual apresentada não considerava adequadamente
+   certas particularidades sobre a temporalidade dos dados. João Victor, William Victor e Gustavo se reuniram novamente em busca de
+   uma modelagem alternativa, e, após algumas propostas analisadas, Gustavo sugeriu a divisão das entidades utilizando o conceito
+   de \nonport{Snapshot} para separar dados temporais de dados atemporais (fixos para uma certa entidade ao longo do tempo),
+   o que permitiu uma modelagem coerente com a complexidade dos dados.
 
-   A respeito da implementação \nonport{Web}, em primeira instância, o grupo se reuniu para discutir os detalhes da aplicação e decidir pequenos detalhes. O uso da ferramenta \nonport{Flask} foi indicado por Gustavo, que, por sua vez, auxiliou Yuri na especificação da arquitetura da aplicação \nonport{Web}, incluindo as maneiras que a aplicação \nonport{front-end} se comunica com o \nonport{back-end} e, por sua vez, como o \nonport{back-end} se comunica com o banco de dados. Os códigos \nonport{html, css} e \nonport{javascript} foram escritos por Yuri.
+   Então, João Victor, junto de William Victor, realizaram a conversão para o modelo lógico e, em seguida, para o modelo
+   físico. De forma quase assíncrona, Yuri e William Victor implementaram o programa que extraísse e tratasse os dados do
+   \nonport{YouTube}.
 
-    Sobre esse documento: os capítulos 1 e 2 foram escritos por William Victor e Yuri. Os capítulo 3 e 5 foram escritos por João Victor. O capítulo 4 foi escrito por Gustavo.
+   A idealização das consultas que seriam realizadas, assim como a sua implementação utilizando queries \nonport{MySql},
+   foi realizada por William Victor. Também foi sua contribuição o estabelecimento de \nonport{views} básicas, a partir das quais
+   \nonport{queries} mais complexas poderiam ser construídas, minimizando a complexidade individual de cada consulta.
 
-    Todos os capítulos desse documento sofreram atualizações conforme o desenvolvimento do trabalho. O confeccionamento, padronização e formatação do documento foi feito por João Victor.
-    
+   A respeito da implementação \nonport{Web}, em primeira instância, o grupo se reuniu para discutir os detalhes da aplicação 
+   e decidir pequenos detalhes. Inicialmente, havia a ideia de pré-computar as consultas necessárias, de modo a simplificar
+   grandemente a implementação da aplicação, que poderia ser estática, requisitando arquivos \nonport{CSV} com os dados de um
+   repositório no \nonport{GitHub}. No entanto, ao compreender que isso inviabilizaria o desenvolvimento de consultas dinâmicas,
+   e possivelmente não se adequaria aos requisitos do trabalho, o grupo decidiu rever a arquitetura da aplicação.
 
+   O uso da ferramenta \nonport{Flask} foi indicado por Gustavo, de modo inspirado por arquivos de instruções auxiliares
+   disponibilizados no mural da disciplina no \nonport{Google Classroom}. Gustavo auxiliou então Yuri na especificação da
+   arquitetura da aplicação \nonport{Web}, determinando as maneiras que o \nonport{front-end} se comunicaria com o \nonport{back-end} e, por sua vez, como o \nonport{back-end} se comunicaria com o banco de dados. Os códigos \nonport{html, css} e \nonport{javascript} foram escritos por Yuri.
+
+    Sobre esse documento: os capítulos 1 e 2 foram escritos por William Victor e Yuri.
+    Os capítulo 3 foi escrito por João Victor.
+    O capítulo 4 foi escrito por Gustavo, e o capítulo 5 escrito inicialmente por João Victor,
+    sendo depois revisto e estendido por Gustavo.
+
+    Todos os capítulos desse documento sofreram atualizações conforme o desenvolvimento do trabalho. A confecção, padronização
+    e formatação do documento foi feita por João Victor.
 
 \chapter{Considerações finais}
 
