@@ -45,9 +45,6 @@
 
   \end{itemize}
 
-  Planejamos utilizar o site \href{https://socialblade.com/}{Social Blade} como apoio para as nossas observações. Podemos caracterizá-lo como um sistema de consultoria para produtores de conteúdo de uma multiplicidade de redes sociais --- como \nonport{YouTube, Twitch, Facebook, TikTok, Twitter} (novo \nonport{X}) e \nonport{Instagram} --- que pretendem entender, dentre outras coisas, como suas postagens e atividades nas redes estão engajando os seguidores, através da análise, em variados intervalos de tempo, do número de visualizações de seus perfis ou da variação da quantidade de seguidores, e qual a sua relevância em comparação a outros criadores segundo vários critérios. O sistema ainda é capaz de realizar projeções de quantidades de acessos e seguidores de 2 meses a 5 anos no futuro. Certamente, o \nonport{Social Blade} possui um banco de dados extremamente complexo e é capaz de performar inúmeras operações complicadas. Nosso papel com esse conjunto de dados não é extraí-lo e agregá-lo ao nosso esquema (até porque isso significaria um projeto além dos nossos atuais propósitos), mas usá-lo como referência para potenciais análises feitas no escopo de nosso modelo, servindo como uma possível confirmação.
-
-
 \chapter{Projeto do Banco de Dados}
 
 \section{Modelo Conceitual}
@@ -58,6 +55,8 @@
     \includegraphics[width=1.0\linewidth]{conceitual.png}
     \caption{Modelagem Conceitual do \nonport{Dataset} utilizado.}
   \end{figure}
+
+  \todo{Gustavo: Nessa seção, não discutimos a entidade Vídeo, sem Snapshot, em momento algum}
 
   O foco da nossa modelagem está em capturar o estado temporal de canais e vídeos \emph{em alta}. As entidades principais são o \var{Canal Snapshot} e o \var{Vídeo Snapshot}, que representam ``fotografias'' do estado de um canal e de um vídeo em um momento específico.
 
@@ -82,6 +81,8 @@
     \caption{Modelagem Lógica do \nonport{Dataset} utilizado.}
   \end{figure}
 
+  \todo{(Gustavo) Padronizar o uso de letras maiúsculas (ou minúsculas) no nome do brModelo/BRModelo ao longo do documento}
+
   Utilizamos a própria ferramenta \var{BRModelo} para a tradução da modelagem conceitual para a modelagem lógica. Ainda assim, o resultado da tradução apresentou diversos erros como chaves primárias e estrangeiras em locais errados, nomes de variáveis incoerentes. Sendo assim, tivemos que corrigir esses detalhes da modelagem lógica gerada pela ferramenta.
 
   Acreditamos que, após nossas correções, o modelo lógico representa nosso modelo com exatidão.
@@ -90,7 +91,7 @@
 \section{Modelo Físico}
 \subsection{Criação da Modelagem}
 
-Primeiramente, a modelagem física foi projetada diretamente da lógica, da qual convertemos para a física utilizando a ferramenta presente no próprio brModelo, fazendo as alterações necessárias conforme fomos verificando os erros da conversão automática. Após isso, para popular o banco de dados, utilizamos o \nonport{CSV} gerado pela \textit{API}, separando-o em outros \nonport{CSV}s menores que correspondiam a cada tabela (utilizando a biblioteca \var{pandas} da linguagem \var{Python} para tratar o formato dos dados e fazer essa separação), portanto, continham apenas as colunas requeridas por cada uma. Dito isso, foi utilizado uma função de importação, do próprio \var{SQL}, que importa todas as linhas de um \nonport{CSV} para tuplas de uma tabela específica. A seguir, encontra-se o código utilizado para a criação dos esquemas desse banco de dados e como os populamos com os \nonport{CSV}s gerados (junto com o código de criação).
+Primeiramente, a modelagem física foi projetada diretamente da lógica, da qual convertemos para a física utilizando a ferramenta presente no próprio brModelo, fazendo as alterações necessárias conforme fomos verificando os erros da conversão automática. Após isso, para popular o banco de dados, utilizamos o \nonport{CSV} gerado pela \textit{API}, separando-o em outros \nonport{CSV}s menores que correspondiam a cada tabela (utilizando a biblioteca \var{pandas} da linguagem \var{Python} para tratar o formato dos dados e fazer essa separação), portanto, continham apenas as colunas requeridas por cada uma. Dito isso, foi utilizada uma função de importação, do próprio \var{SQL}, que importa todas as linhas de um \nonport{CSV} para tuplas de uma tabela específica. A seguir, encontra-se o código utilizado para a criação dos esquemas desse banco de dados e como os populamos com os \nonport{CSV}s gerados (junto com o código de criação).
 
 \begin{enumerate}
   \item Tabela \var{Video}
@@ -149,7 +150,7 @@ Primeiramente, a modelagem física foi projetada diretamente da lógica, da qual
       Numero_de_visualizacoes BIGINT,
       Descricao TEXT,
       Numero_de_comentarios BIGINT,
-       Data DATE,
+      Data DATE,
       Video_ID CHAR(11),
       PRIMARY KEY (Data, Video_ID)
     );
@@ -603,8 +604,17 @@ ORDER BY VR.Total_de_visualizacoes DESC;
 
 \chapter{Aplicação}
 
-   \todo{Descrever a aplicação web desenvolvida, explicando como foi implementada e detalhando, com exemplos, as funcionalidades que ela disponibiliza.}
-
+  A aplicação desenvolvida consiste de três componentes principais: o \emph{front-end} de HTML e \emph{JavaScript},
+  o back-end escrito em \emph{Python}, e o servidor de banco de dados \emph{MySql}. O \emph{back-end} em \emph{Python}
+  utiliza a biblioteca
+  \emph{Flask} para estabelecer o servidor web, que serve inicialmente alguns arquivos estáticos e aguarda a escolha de uma
+  consulta, cujos dados serão exibidos. A página inicial exibe um menu \emph{dropdown} em que se pode escolher entre cada
+  uma das consultas possíveis à base de dados. Dependendo da consulta, o site então pergunta por dados adicionais. Por exemplo,
+  qual canal consultar, ou sobre qual data se deseja obter informações. Para essas consultas, a \emph{query} padrão será
+  completada através da definição de algumas \emph{user-defined variables}, para que seja específica aos parâmetros
+  selecionados. Há então a consulta ao banco de dados através da biblioteca \emph{mysql} para \emph{Python}, e os dados
+  serão retornados ao \emph{front-end} em arquivos HTML, populados por meio dos mecanismos de \emph{templates} do \emph{Flask}.
+  Para gerar gráficos, o \emph{back-end} utiliza a biblioteca \emph{matplotlib}.
 
 \chapter{Distribuição do trabalho}
 
