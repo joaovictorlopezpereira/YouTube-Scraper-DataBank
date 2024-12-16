@@ -1,33 +1,34 @@
 \chapter{Introdução}
 
-  O website \nonport{YouTube}, de propriedade da \nonport{Google}, consiste em uma plataforma online de compartilhamento de vídeos.
-  Diariamente, milhões de usuários publicam e assistem vídeos de assuntos variados no \nonport{site} através de seus computadores,
+  O \nonport{website} \nonport{YouTube}, de propriedade da \nonport{Google}, consiste em uma plataforma \nonport{online}
+  de compartilhamento de vídeos. Diariamente, milhões de usuários publicam e assistem vídeos de assuntos
+  variados no \nonport{site} através de seus computadores,
   dispositivos móveis ou mesmo \nonport{smart TVs} de vários países ao redor do mundo. O \nonport{YouTube}, por meio de um
   algoritmo de recomendação, seleciona, para um dado usuário, conteúdo voltado aos seus interesses. Como resultado desse processo,
-  certos vídeos se popularizam de maneira notória, passando a participar de uma seção especial na plataforma, denominada "em alta".
-  Os vídeos dessa seção variam de acordo com o país, sendo portanto, adequada à realidade do usuário que a acessa.
+  certos vídeos se popularizam de maneira notória, passando a participar de uma seção especial na plataforma, denominada
+  ``em alta''.  Os vídeos dessa seção variam de acordo com o país, sendo portanto, adequada à realidade do usuário que a acessa.
 
   O tema do nosso trabalho é a análise de tendências no \nonport{YouTube}, com foco em compreender quais tipos de vídeos estão em alta na plataforma, identificar os canais mais influentes e observar o engajamento que esses vídeos recebem, medido em termos de curtidas, comentários e visualizações. Através dessa análise, buscamos extrair \nonport{insights} que permitam caracterizar o que define um vídeo popular, os padrões de conteúdo que se destacam, e a relação entre a popularidade e o país de origem dos vídeos. Para isso, estamos nos guiando através das seguintes principais questões: ``Quais categorias de vídeos estão em alta?'', ``Quais tipos de canais produzem o conteúdo mais relevante e visualizado?'', ``Como as tendências variam de acordo com as regiões?'' e ``Qual a relação entre quantidade de comentários e \nonport{likes} e a classificação de um vídeo?''. Essas perguntas, além de norteadoras, nos motivaram a escolher esse tema. Por meio desta análise, buscamos não apenas identificar padrões regionais e globais, mas também entender como os algoritmos da plataforma podem influenciar o comportamento do público e o sucesso de certos tipos de conteúdo.
 
   Consultas realizadas, assim como a modelagem física em \var{SQL}, a modelagem conceitual e lógica utilizando
-  o \nonport{brModelo}, e a coleta de dados implementada em \var{Python}, podem ser encontrados
+  o \var{brModelo}, e a coleta de dados implementada em \var{Python}, podem ser encontrados
   em \cite{our-YoutubeScraperDataBank}.
 
 \chapter{Datasets}
 
-  Os conjuntos de dados utilizados estão sendo extraídos por meio de um programa em \var{Python} que na verdade é o \href{https://github.com/mitchelljy/Trending-YouTube-Scraper}{\var{YouTube Data Scraper} do usuário \var{mitchelljy}}, publicado em seu \href{https://github.com/mitchelljy}{\nonport{GitHub}}, incrementado com diversas modificações que nos permitem extrair dados públicos de nosso interesse. A chave \href{https://developers.google.com/youtube/v3/docs?hl=pt-br}{\var{YouTube Data API v3}} que está sendo utilizada foi adquirida por meio do \nonport{YouTube} em uma de nossas próprias contas. Os dados extraídos pelo programa são armazenados em arquivos \nonport{CSV} que o próprio programa gera. É importante mencionar que a página de \var{mitchelljy} do \nonport{GitHub} foi encontrada por meio do site \nonport{Kaggle}\cite{kaggle}.
+  Os conjuntos de dados utilizados estão sendo extraídos por meio de um programa em \var{Python} que na verdade é o \href{https://github.com/mitchelljy/Trending-YouTube-Scraper}{\var{YouTube Data Scraper} do usuário \var{mitchelljy}}, publicado em seu \href{https://github.com/mitchelljy}{\nonport{GitHub}}, incrementado com diversas modificações que nos permitem extrair dados públicos de nosso interesse. A chave \href{https://developers.google.com/youtube/v3/docs?hl=pt-br}{\var{YouTube Data API v3}} que está sendo utilizada foi adquirida por meio do \nonport{YouTube} em uma de nossas próprias contas. Os dados extraídos pelo programa são armazenados em arquivos \nonport{CSV} que o próprio programa gera. É importante mencionar que a página de \var{mitchelljy} do \nonport{GitHub} foi encontrada por meio do \nonport{site} \nonport{Kaggle}\cite{kaggle}.
 
   Os dados contidos no \nonport{CSV} e seus respectivos tipos são:
 
   \begin{itemize}
-    \item \var{video\underline{ }id}: contém, em cada registro, o \var{ID} do vídeo gerado pelo próprio \nonport{YouTube}. Esse \var{ID} é utilizado para, além de mera caracterização de vídeos únicos na plataforma, a geração de suas \nonport{URL}s, por exemplo. Cada \var{ID} é uma sequência alfanumérica de símbolos, sendo mais apropriado modelá-lo como cadeia de caracteres (\nonport{string}) em nosso sistema;
+    \item \var{video\underline{ }id}: contém, em cada registro, o \nonport{ID} do vídeo gerado pelo próprio \nonport{YouTube}. Esse \nonport{ID} é utilizado para, além de mera caracterização de vídeos únicos na plataforma, a geração de suas \nonport{URL}s, por exemplo. Cada \nonport{ID} é uma sequência alfanumérica de símbolos, sendo mais apropriado modelá-lo como cadeia de caracteres (\nonport{string}) em nosso sistema;
     \item \var{title}: refere-se ao título do vídeo em sua língua original (em que foi publicado). Suporta caracteres de \nonport{UTF-8}. É, naturalmente, do tipo textual, sendo, portanto, claramente representável por valores do domínio de \nonport{strings};
     \item \var{publishedAt}: corresponde à data e hora de publicação do vídeo (com relação ao Tempo Universal Coordenado \nonport{UTC}). O valores desse atributo são resgatados no formato \href{https://www.w3.org/TR/NOTE-datetime}{\nonport{ISO 8601}} e podem ser mapeados para o domínio \nonport{DATETIME} do \nonport{SGBD};
-    \item \var{channelId}: análogo ao \var{ID} gerado para o vídeo, este campo armazena o \var{ID} criado pelo site para cada canal, neste caso, o canal que publicou o vídeo. É uma cadeia alfanumérica e, consequentemente, está no domínio de \nonport{strings};
+    \item \var{channelId}: análogo ao \nonport{ID} gerado para o vídeo, este campo armazena o \nonport{ID} criado pelo \nonport{site} para cada canal, neste caso, o canal que publicou o vídeo. É uma cadeia alfanumérica e, consequentemente, está no domínio de \nonport{strings};
     \item \var{channelTitle}: também análogo ao título do vídeo, é relativo ao título do canal que postou o determinado vídeo. É do tipo textual e mapeado no tipo \nonport{string};
     \item \var{categoryId}: corresponde ao identificador da categoria atribuída ao vídeo pelo canal que o publicou. No \href{https://developers.google.com/youtube/v3/docs/videos?hl=pt-br#snippet.categoryId}{guia de referências da \nonport{API}} consta que é um dado do tipo \nonport{string}, porém, após coleta da listagem de categorias disponíveis, percebemos que todas se tratam de inteiros de 1 a 44 (pulando alguns). Portanto, consideramos que a atribuição ao domínio dos inteiros seja a melhor alternativa;
     \item \var{trending\underline{ }date}: contém a data em que o vídeo está em alta, ou seja, equivale à data em que o arquivo \nonport{CSV} foi criado. Está em um formato diferente do utilizado pela \nonport{API} do \nonport{YouTube}, pois é uma informação adicionada artificialmente no \nonport{script}. Consiste do ano, dia e mês de coleta dos dados, nesta ordem, separados por ponto final (AA.DD.MM). É naturalmente associável ao domínio \nonport{DATE};
-    \item \var{tags}: corresponde a uma lista de \nonport{tags} (etiquetas) atribuídas ao vídeo, usadas como auxílio para o algoritmo de recomendações da plataforma. São pequenas porções de texto (ocorrências de \var{tag}) separadas por vírgulas (`,'). É permitido que a \var{tag} contenha espaços. Cada \var{tag} encaixa-se no domínio string;
+    \item \var{tags}: corresponde a uma lista de \nonport{tags} (etiquetas) atribuídas ao vídeo, usadas como auxílio para o algoritmo de recomendações da plataforma. São pequenas porções de texto (ocorrências de \var{tag}) separadas por vírgulas (`,'). É permitido que a \var{tag} contenha espaços. Cada \var{tag} encaixa-se no domínio \nonport{string};
     \item \var{view\underline{ }count}: é o número total de visualizações que o vídeo teve desde sua publicação até o instante da captura dos dados. Consiste de um inteiro não-negativo (logicamente) e, por isso, pode ser modelado por um inteiro longo sem sinal;
     \item \var{likes}: é uma métrica numérica, assim como a contagem de visualizações, referente ao número de curtidas (\nonport{likes}) que o vídeo obteve até a coleta dos dados. É inteiro longo maior ou igual a zero;
     \item \var{comment\underline{ }count}: novamente, é um campo numérico que retrata a quantidade de comentários que o vídeo recebeu até a captura dos dados. Pertence ao domínio de inteiros longos sem sinal;
@@ -38,7 +39,7 @@
     \item \var{channel\underline{ }creation\underline{ }date}: diz respeito à data e hora (no mesmo formato \var{ISO 8601} do campo \var{published\underline{ }at}) de criação do canal que publicou o vídeo. É mapeado no domínio \nonport{DATETIME} do \var{SGBD};
     \item \var{channel\underline{ }subscriber\underline{ }count}: corresponde ao número de inscritos que o canal publicador possui no momento da coleta de dados. Assim como as métricas do vídeo, é um dado altamente mutável e que assume valores inteiros potencialmente grandes. Por esse motivo, optamos por usar o domínio \nonport{BIGINT};
     \item \var{channel\underline{ }video\underline{ }count}: é a quantidade de vídeos publicados, até então, pelo canal responsável pelo vídeo em questão. Dificilmente passará a marca de $2^{31} - 1$, então assumimos tipo inteiro de $4$ \nonport{bytes};
-    \item \var{video\underline{ }url}: condiz com a \nonport{URL} gerada pelo \nonport{YouTube} para o vídeo (que foi discutida na descrição de \var{video\underline{ }id}). É obtida, no código de coleta e organização dos dados, a partir da concatenação da \nonport{URL} padrão para redirecionamento em vídeo com o \var{ID} do vídeo. Por corresponder a uma sequência de caracteres, é melhor modelado por uma string;
+    \item \var{video\underline{ }url}: condiz com a \nonport{URL} gerada pelo \nonport{YouTube} para o vídeo (que foi discutida na descrição de \var{video\underline{ }id}). É obtida, no código de coleta e organização dos dados, a partir da concatenação da \nonport{URL} padrão para redirecionamento em vídeo com o \nonport{ID} do vídeo. Por corresponder a uma sequência de caracteres, é melhor modelado por uma \nonport{string};
     \item \var{channel\underline{ }description}: refere-se a uma descrição textual do canal dada por seu criador, similar à descrição do vídeo. Escolheu-se o tipo \nonport{TEXT} para armazená-la do banco de dados;
     \item \var{channel\underline{ }image}: relativo ao ícone do canal. Seu formato é de uma \nonport{URL} que redireciona para a imagem em questão. Por isso, decidimos tratar como \nonport{string};
     \item \var{channel\underline{ }country}: configura o código do país ao qual o canal publicador está associado. É determinado por uma \nonport{string} de exatamente dois caracteres (ou três para \var{N/A}, se o canal não o possui) e \emph{supomos} que equivale ao padrão \href{https://www.iso.org/iso-3166-country-codes.html}{\var{ISO 3166-1}}\cite{iso-3166}
@@ -161,7 +162,7 @@ Primeiramente, a modelagem física foi projetada diretamente da lógica, da qual
     );
   \end{code}
 
-  A tabela \var{Video\underline{ }Snapshot} guarda informações em um certo momento do tempo detalhadas de cada vídeo, como o título, número de likes, visualizações, descrição, número de comentários e a data específica desse instante dos dados, vinculados ao vídeo identificado pelo \var{ID} do vídeo. Esta tabela permite o registro de \nonport{snapshots} dos dados de vídeos ao longo do tempo.
+  A tabela \var{Video\underline{ }Snapshot} guarda informações em um certo momento do tempo detalhadas de cada vídeo, como o título, número de likes, visualizações, descrição, número de comentários e a data específica desse instante dos dados, vinculados ao vídeo identificado pelo \nonport{ID} do vídeo. Esta tabela permite o registro de \nonport{snapshots} dos dados de vídeos ao longo do tempo.
 
   \item Tabela \var{Canal\underline{ }Snapshot}
 
@@ -631,13 +632,13 @@ ORDER BY VR.Total_de_visualizacoes DESC;
   A aplicação desenvolvida consiste de três componentes principais: o \emph{front-end} de \var{HTML} e \var{JavaScript},
   o back-end escrito em \var{Python}, e o servidor de banco de dados \var{MySQL}. O \emph{back-end} em \var{Python}
   utiliza a biblioteca
-  \emph{Flask} para estabelecer o servidor \nonport{Web}, que serve inicialmente alguns arquivos estáticos e aguarda a escolha de uma
+  \var{Flask} para estabelecer o servidor \nonport{Web}, que serve inicialmente alguns arquivos estáticos e aguarda a escolha de uma
   consulta, cujos dados serão exibidos. A página inicial exibe um menu \emph{dropdown} em que se pode escolher entre cada
-  uma das consultas possíveis à base de dados. Dependendo da consulta, o site então pergunta por dados adicionais. Por exemplo,
+  uma das consultas possíveis à base de dados. Dependendo da consulta, o \nonport{site} então pergunta por dados adicionais. Por exemplo,
   qual canal consultar, ou sobre qual data se deseja obter informações. Para essas consultas, a \nonport{query} padrão será
   completada através da definição de algumas \emph{user-defined variables}, para que seja específica aos parâmetros
   selecionados. Há então a consulta ao banco de dados através da biblioteca \var{MySQL} para \var{Python}, e os dados
-  serão retornados ao \emph{front-end} em arquivos \var{HTML}, populados por meio dos mecanismos de \emph{templates} do \emph{Flask}.
+  serão retornados ao \emph{front-end} em arquivos \var{HTML}, populados por meio dos mecanismos de \emph{templates} do \var{Flask}.
   Para gerar gráficos, o \emph{back-end} utiliza a biblioteca \var{matplotlib}.
 
   \begin{figure}[H]
@@ -685,7 +686,7 @@ ORDER BY VR.Total_de_visualizacoes DESC;
    repositório no \nonport{GitHub}. No entanto, ao compreender que isso inviabilizaria o desenvolvimento de consultas dinâmicas,
    e possivelmente não se adequaria aos requisitos do trabalho, o grupo decidiu rever a arquitetura da aplicação.
 
-   O uso da ferramenta \nonport{Flask} foi indicado por Gustavo, de modo inspirado por arquivos de instruções auxiliares
+   O uso da ferramenta \var{Flask} foi indicado por Gustavo, de modo inspirado por arquivos de instruções auxiliares
    disponibilizados no mural da disciplina no \nonport{Google Classroom}. Gustavo auxiliou então Yuri na especificação da
    arquitetura da aplicação \nonport{Web}, determinando as maneiras que o \nonport{front-end} se comunicaria com o
    \nonport{back-end} e, por sua vez, como o \nonport{back-end} se comunicaria com o banco de dados.
@@ -693,9 +694,8 @@ ORDER BY VR.Total_de_visualizacoes DESC;
 
     Sobre esse documento: os capítulos 1 e 2 foram escritos por William Victor e Yuri.
     O capítulo 3 foi escrito por João Victor.
-    O capítulo 4 foi escrito por Gustavo, e o capítulo 5 escrito inicialmente por João Victor,
-    sendo depois revisto e estendido por Gustavo.
-    O capítulo 6 foi escrito inicialmente por João Victor, e posteriormente incrementado por Gustavo.
+    O capítulo 4 foi escrito por Gustavo, e os capítulos 5 e 6 escritos inicialmente por João Victor,
+    sendo depois revistos e estendidos por Gustavo.
 
     Todos os capítulos desse documento sofreram atualizações conforme o desenvolvimento do trabalho. A confecção, padronização
     e formatação do documento foi feita por João Victor e Gustavo.
