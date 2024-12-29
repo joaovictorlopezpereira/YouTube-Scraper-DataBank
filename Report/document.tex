@@ -662,59 +662,59 @@ ORDER BY VR.Total_de_visualizacoes DESC;
 
 \chapter{Distribuição do Trabalho}
 
-   Inicialmente, os membros do grupo se reuniram para debater a modelagem conceitual para o tema proposto e, após diversos
-   protótipos, foi encontrada uma solução plausível para a modelagem. Em seguida, João Victor tratou da implementação do
-   modelo conceitual no \var{brModelo}.
+  Inicialmente, os membros do grupo se reuniram para debater a modelagem conceitual para o tema proposto e, após diversos
+  protótipos, foi encontrada uma solução plausível para a modelagem. Em seguida, João Victor tratou da implementação do
+  modelo conceitual no \var{brModelo}.
 
-   No entanto, após a rodada inicial de apresentações,
-   se tornou evidente por meio do \nonport{feedback} obtido que a modelagem conceitual apresentada não considerava adequadamente
-   certas particularidades sobre a temporalidade dos dados. João Victor, William Victor e Gustavo se reuniram novamente em busca de
-   uma modelagem alternativa, e, após algumas propostas analisadas, Gustavo sugeriu a divisão das entidades utilizando o conceito
-   de \nonport{Snapshot} para separar dados temporais de dados atemporais (fixos para uma certa entidade ao longo do tempo),
-   o que permitiu uma modelagem coerente com a complexidade dos dados.
+  No entanto, após a rodada inicial de apresentações,
+  se tornou evidente por meio do \nonport{feedback} obtido que a modelagem conceitual apresentada não considerava adequadamente
+  certas particularidades sobre a temporalidade dos dados. João Victor, William Victor e Gustavo se reuniram novamente em busca de
+  uma modelagem alternativa, e, após algumas propostas analisadas, Gustavo sugeriu a divisão das entidades utilizando o conceito
+  de \nonport{Snapshot} para separar dados temporais de dados atemporais (fixos para uma certa entidade ao longo do tempo),
+  o que permitiu uma modelagem coerente com a complexidade dos dados.
 
-   Então, João Victor, junto de William Victor, realizaram a conversão para o modelo lógico e, em seguida, para o modelo
-   físico. De forma quase assíncrona, Yuri e William Victor implementaram o programa que extraísse e tratasse os dados do
-   \nonport{YouTube}.
+  Então, João Victor, junto de William Victor, realizaram a conversão para o modelo lógico e, em seguida, para o modelo
+  físico. De forma quase assíncrona, Yuri e William Victor implementaram o programa que extraísse e tratasse os dados do
+  \nonport{YouTube}.
 
-   A idealização das consultas que seriam realizadas, assim como a sua implementação utilizando \nonport{queries} \var{MySQL},
-   foi realizada por William Victor. Também foi sua contribuição o estabelecimento de \nonport{views} básicas, a partir das quais
-   \nonport{queries} mais complexas poderiam ser construídas, minimizando a complexidade individual de cada consulta.
+  A idealização das consultas que seriam realizadas, assim como a sua implementação utilizando \nonport{queries} \var{MySQL},
+  foi realizada por William Victor. Também foi sua contribuição o estabelecimento de \nonport{views} básicas, a partir das quais
+  \nonport{queries} mais complexas poderiam ser construídas, minimizando a complexidade individual de cada consulta.
 
-   A respeito da implementação \nonport{Web}, em primeira instância, o grupo se reuniu para discutir os detalhes da aplicação 
-   e decidir pequenos detalhes. Inicialmente, havia a ideia de pré-computar as consultas necessárias, de modo a simplificar
-   grandemente a implementação da aplicação, que poderia ser estática, requisitando arquivos \nonport{CSV} com os dados de um
-   repositório no \nonport{GitHub}. No entanto, ao compreender que isso inviabilizaria o desenvolvimento de consultas dinâmicas,
-   e possivelmente não se adequaria aos requisitos do trabalho, o grupo decidiu rever a arquitetura da aplicação.
+  A respeito da implementação \nonport{Web}, em primeira instância, o grupo se reuniu para discutir os detalhes da aplicação
+  e decidir pequenos detalhes. Inicialmente, havia a ideia de pré-computar as consultas necessárias, de modo a simplificar
+  grandemente a implementação da aplicação, que poderia ser estática, requisitando arquivos \nonport{CSV} com os dados de um
+  repositório no \nonport{GitHub}. No entanto, ao compreender que isso inviabilizaria o desenvolvimento de consultas dinâmicas,
+  e possivelmente não se adequaria aos requisitos do trabalho, o grupo decidiu rever a arquitetura da aplicação.
 
-   O uso da ferramenta \var{Flask} foi indicado por Gustavo, de modo inspirado por arquivos de instruções auxiliares
-   disponibilizados no mural da disciplina no \nonport{Google Classroom}. Gustavo auxiliou então Yuri na especificação da
-   arquitetura da aplicação \nonport{Web}, determinando as maneiras que o \nonport{front-end} se comunicaria com o
-   \nonport{back-end} e, por sua vez, como o \nonport{back-end} se comunicaria com o banco de dados.
-   Os códigos \var{HTML}, \var{CSS} e \var{JavaScript} foram escritos por Yuri.
+  O uso da ferramenta \var{Flask} foi indicado por Gustavo, de modo inspirado por arquivos de instruções auxiliares
+  disponibilizados no mural da disciplina no \nonport{Google Classroom}. Gustavo auxiliou então Yuri na especificação da
+  arquitetura da aplicação \nonport{Web}, determinando as maneiras que o \nonport{front-end} se comunicaria com o
+  \nonport{back-end} e, por sua vez, como o \nonport{back-end} se comunicaria com o banco de dados.
+  Os códigos \var{HTML}, \var{CSS} e \var{JavaScript} foram escritos por Yuri.
 
-    Sobre esse documento: os capítulos 1 e 2 foram escritos por William Victor e Yuri.
-    O capítulo 3 foi escrito por João Victor.
-    O capítulo 4 foi escrito por Gustavo, e os capítulos 5 e 6 escritos inicialmente por João Victor,
-    sendo depois revistos e estendidos por Gustavo.
+  Sobre esse documento: os capítulos 1 e 2 foram escritos por William Victor e Yuri.
+  O capítulo 3 foi escrito por João Victor.
+  O capítulo 4 foi escrito por Gustavo, e os capítulos 5 e 6 escritos inicialmente por João Victor,
+  sendo depois revistos e estendidos por Gustavo.
 
-    Todos os capítulos desse documento sofreram atualizações conforme o desenvolvimento do trabalho. A confecção, padronização
-    e formatação do documento foi feita por João Victor e Gustavo.
+  Todos os capítulos desse documento sofreram atualizações conforme o desenvolvimento do trabalho. A confecção, padronização
+  e formatação do documento foi feita por João Victor e Gustavo.
 
 \chapter{Considerações Finais}
 
-   Este trabalho, apresentado como projeto final de disciplina de Banco de Dados, criou um contexto interessante no qual
-   aplicar aquilo que estudamos ao longo de um semestre e desenvolver habilidades complementares.
-   Descobrimos como interagir com a \nonport{API} do \nonport{YouTube}, escrevemos \nonport{scripts} para consulta, executados diariamente
-   por um período de aproximadamente um mês para a coleta dos dados, selecionamos e tratamos as informações,
-   populamos um banco de dados \var{MySQL} e escrevemos um servidor para uma aplicação \nonport{Web} que acessa e exibe
-   as estatísticas coletadas.
+  Este trabalho, apresentado como projeto final de disciplina de Banco de Dados, criou um contexto interessante no qual
+  aplicar aquilo que estudamos ao longo de um semestre e desenvolver habilidades complementares.
+  Descobrimos como interagir com a \nonport{API} do \nonport{YouTube}, escrevemos \nonport{scripts} para consulta, executados diariamente
+  por um período de aproximadamente um mês para a coleta dos dados, selecionamos e tratamos as informações,
+  populamos um banco de dados \var{MySQL} e escrevemos um servidor para uma aplicação \nonport{Web} que acessa e exibe
+  as estatísticas coletadas.
 
-   Cada uma das etapas acima trouxe impedimentos de natureza conceitual e de implementação, que precisaram ser superados pelo
-   grupo. Levando em conta que nenhum dos seus
-   integrantes havia experiência prévia com bancos de dados ou desenvolvimento \nonport{Web}, e, visto que conseguimos
-   de forma satisfatória realizar a coleta de dados e, afinal, efetuar consultas dinâmicas ao banco por meio da aplicação,
-   concluímos que o resultado alcançado atendeu às expectativas.
+  Cada uma das etapas acima trouxe impedimentos de natureza conceitual e de implementação, que precisaram ser superados pelo
+  grupo. Levando em conta que nenhum dos seus
+  integrantes havia experiência prévia com bancos de dados ou desenvolvimento \nonport{Web}, e, visto que conseguimos
+  de forma satisfatória realizar a coleta de dados e, afinal, efetuar consultas dinâmicas ao banco por meio da aplicação,
+  concluímos que o resultado alcançado atendeu às expectativas.
 
-   Em resumo, dado o objetivo inicial do projeto, concordamos que o resultado alcançado foi um sucesso.
-   
+  Em resumo, dado o objetivo inicial do projeto, concordamos que o resultado alcançado foi um sucesso.
+
