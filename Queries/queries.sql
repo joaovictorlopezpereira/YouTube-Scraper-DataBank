@@ -43,10 +43,9 @@ Quantidade de dias que constam no conjunto de dados incorporado.
 SELECT COUNT(DISTINCT Data) AS Dias_coletados
 FROM Canal_Snapshot;
 
-/* 
+/*
 >> Quantidade de views em alta por canal
-Exibe, em ordem decrescente de total de visualizações, os canais que mais tiveram
-visualizações em seus vídeos em alta durante o período de coleta.
+Exibe, em ordem decrescente de total de visualizações, os canais que mais tiveram visualizações em seus vídeos em alta durante o período de coleta.
 */
 WITH
 	Video_mais_recente AS
@@ -64,9 +63,7 @@ ORDER BY VR.Total_de_visualizacoes DESC;
 
 /*
 >> Canais que ficaram no em alta mais vezes
-Exibe, em ordem decrescente, os canais que mais apareceram no Em Alta e a quantidade
-de vezes que isso aconteceu. Consideramos como aparição cada ocorrência de um vídeo do
-canal no Em Alta de um país em uma data.
+Exibe, em ordem decrescente, os canais que mais apareceram no Em Alta e a quantidade de vezes que isso aconteceu. Consideramos como aparição cada ocorrência de um vídeo do canal no Em Alta de um país em uma data.
 */
 SELECT CS.Titulo AS Canal, COUNT(CS.Canal_ID) AS Numero_de_aparicoes
 FROM Trend AS T JOIN
@@ -81,9 +78,7 @@ ORDER BY Numero_de_aparicoes DESC;
 
 /*
 >> Tags mais utilizadas
-Exibe, em ordem descrescente, o número de vezes que uma tag apareceu em algum
-vídeo em alta. Consideramos como aparição cada ocorrência de uma tag em cada vídeo
-em sua aparição mais recente em cada Em Alta que esteve. 
+Exibe, em ordem decrescente, o número de vezes que uma tag apareceu em algum vídeo em alta. Consideramos como aparição cada ocorrência de uma tag em cada vídeo em sua aparição mais recente em cada Em Alta que esteve.
 */
 SELECT Tag, COUNT(Tag) AS Numero_de_usos
 FROM Ultima_aparicao_video_pais AS UAVP JOIN
@@ -94,9 +89,7 @@ ORDER BY Numero_de_usos DESC;
 
 /*
 >> Palavras-chave mais utilizadas
-Exibe, em ordem descrescente, o número de vezes que uma palavra-chave apareceu em
-algum vídeo em alta. Consideramos como aparição cada ocorrência de uma palavra-chave
-em cada canal em sua aparição mais recente em cada Em Alta que esteve.
+Exibe, em ordem decrescente, o número de vezes que uma palavra-chave apareceu em algum vídeo em alta. Consideramos como aparição cada ocorrência de uma palavra-chave em cada canal em sua aparição mais recente em cada Em Alta que esteve.
 */
 SELECT Palavra_chave, COUNT(Palavra_chave) AS Numero_de_usos
 FROM Ultima_aparicao_canal_pais AS UACP JOIN
@@ -107,9 +100,7 @@ ORDER BY Numero_de_usos DESC;
 
 /*
 >> Países (ou não) que mais apareceram no Em Alta
-Apresenta cada país e o número de vezes que um canal sediado apareceu no Em Alta.
-Consideramos como aparição cada ocorrência de canal sediado no país para cada
-vídeo seu no Em Alta de um país em uma data.
+Apresenta cada país e o número de vezes que um canal sediado apareceu no Em Alta. Consideramos como aparição cada ocorrência de canal sediado no país para cada vídeo seu no Em Alta de um país em uma data.
 */
 WITH
 	Paises_em_alta AS
@@ -133,18 +124,17 @@ ORDER BY Numero_de_aparicoes DESC;
 
 /*
 >> Vídeos que já estiveram Em Alta de um canal
-Exibe todos os vídeos e suas informações, em sua versão mais recente, de um dado canal 
-que já estiveram em alta no nosso conjunto de dados.
+Exibe todos os vídeos e suas informações, em sua versão mais recente, de um dado canal que já estiveram em alta no nosso conjunto de dados.
 */
 SET @Canal_buscado = 'MrBeast'; -- Nome do canal como entrada
-SELECT V.ID, 
-	   VS.Titulo, 
-       CT.Nome AS Categoria, 
+SELECT V.ID,
+	   VS.Titulo,
+       CT.Nome AS Categoria,
        VS.Descricao,
-       V.Data_de_publicacao, 
-       VS.Numero_de_likes, 
+       V.Data_de_publicacao,
+       VS.Numero_de_likes,
        VS.Numero_de_comentarios,
-       VS.Numero_de_visualizacoes, 
+       VS.Numero_de_visualizacoes,
        UAV.Ultima_data AS Ultima_vez_no_Trend
 FROM Video AS V JOIN
 		Video_Snapshot AS VS ON V.ID = VS.Video_ID JOIN
@@ -173,9 +163,7 @@ ORDER BY Numero_de_videos DESC;
 
 /*
 >> Aparições das categorias no Em Alta
-Mostra quantas vezes cada categoria apareceu no Em Alta. Consideramo como
-aparição cada ocorrência da categoria em um vídeo em sua última versão que
-esteve em alta em cada país do conjunto de dados.
+Mostra quantas vezes cada categoria apareceu no Em Alta. Consideramos como aparição cada ocorrência da categoria em um vídeo em sua última versão que esteve em alta em cada país do conjunto de dados.
 */
 SELECT CT.Nome AS Categoria, COUNT(CT.Nome) AS Numero_de_aparicoes
 FROM Ultima_aparicao_video_pais AS UAVP JOIN
@@ -212,8 +200,7 @@ ORDER BY Total_de_likes DESC;
 
 /*
 >> Tags com mais visualizações totais por categoria
-Apresenta o total de visualizações que assuntos angariaram dentro de uma categoria
-a partir das tags dos vídeos em alta.
+Apresenta o total de visualizações que assuntos angariaram dentro de uma categoria a partir das tags dos vídeos em alta.
 */
 SET @Categoria_buscada = 'Gaming'; -- Nome da categoria como entrada
 SELECT T.Tag, SUM(VS.Numero_de_visualizacoes) AS Total_de_visualizacoes
@@ -230,9 +217,7 @@ ORDER BY Total_de_visualizacoes DESC;
 
 /*
 >> Países que um canal mais apareceu no Em Alta
-Exibe os países que um canal apareceu mais vezes no Em Alta.
-Consideramos como aparição cada ocorrência de um vídeo do
-canal no Em Alta do país em uma data.
+Exibe os países que um canal apareceu mais vezes no Em Alta. Consideramos como aparição cada ocorrência de um vídeo do canal no Em Alta do país em uma data.
 */
 SET @Canal_buscado = 'MrBeast'; -- Nome do canal como entrada
 SELECT T.Pais_Codigo AS Pais, COUNT(CS.Titulo) AS Numero_de_vezes_no_Trend

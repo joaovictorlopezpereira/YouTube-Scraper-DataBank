@@ -3,18 +3,18 @@ import mysql.connector
 import matplotlib.pyplot as plt
 import io
 
-#opções do select mapeadas para suas respectivas querys no SQL
+# Select options mapped to their respective queries in SQL
 consultas = {
-    "consulta1":  
-''' 
-SELECT V.ID, 
-       VS.Titulo, 
-       CT.Nome AS Categoria, 
+    "consulta1":
+'''
+SELECT V.ID,
+       VS.Titulo,
+       CT.Nome AS Categoria,
        VS.Descricao,
-       V.Data_de_publicacao, 
-       VS.Numero_de_likes, 
+       V.Data_de_publicacao,
+       VS.Numero_de_likes,
        VS.Numero_de_comentarios,
-       VS.Numero_de_visualizacoes, 
+       VS.Numero_de_visualizacoes,
        UAV.Ultima_data AS Ultima_vez_no_Trend
 FROM Video AS V JOIN
         Video_Snapshot AS VS ON V.ID = VS.Video_ID JOIN
@@ -27,13 +27,13 @@ ORDER BY Ultima_vez_no_Trend DESC;
 ''',
      "consulta2":
 '''
-SELECT V.ID, 
-       VS.Titulo, 
+SELECT V.ID,
+       VS.Titulo,
        CS.Titulo AS Canal,
-       CT.Nome AS Categoria, 
+       CT.Nome AS Categoria,
        VS.Descricao,
-       V.Data_de_publicacao, 
-       VS.Numero_de_likes, 
+       V.Data_de_publicacao,
+       VS.Numero_de_likes,
        VS.Numero_de_comentarios,
        VS.Numero_de_visualizacoes
 FROM Video AS V JOIN
@@ -54,7 +54,7 @@ FROM Ultima_aparicao_canal_pais AS UACP JOIN
 GROUP BY Palavra_chave
 ORDER BY Numero_de_usos DESC;
 ''',
-     "consulta4": 
+     "consulta4":
 '''
 SELECT Tag, COUNT(Tag) AS Numero_de_usos
 FROM Ultima_aparicao_video_pais AS UAVP JOIN
@@ -63,7 +63,7 @@ FROM Ultima_aparicao_video_pais AS UAVP JOIN
 GROUP BY Tag
 ORDER BY Numero_de_usos DESC;
 ''',
-     "consulta5": #SOMAR STRING COM SET!
+     "consulta5": # SUM WITH SET
 '''
 SELECT T.Tag, SUM(VS.Numero_de_visualizacoes) AS Total_de_visualizacoes
 FROM Ultima_aparicao_video AS UAV JOIN
@@ -104,7 +104,7 @@ FROM (SELECT Canal_ID, SUM(Numero_de_visualizacoes) AS Total_de_visualizacoes
         Canal_Snapshot AS CS USING (Canal_ID)
 ORDER BY VR.Total_de_visualizacoes DESC;
 ''',
-     "consulta8": 
+     "consulta8":
 '''
 SELECT CT.Nome AS Categoria, SUM(VS.Numero_de_likes) AS Total_de_likes
 FROM Ultima_aparicao_video AS UAV JOIN
@@ -124,7 +124,7 @@ FROM Ultima_aparicao_video_pais AS UAVP JOIN
 GROUP BY CT.Nome
 ORDER BY Numero_de_aparicoes DESC;
 ''',
-     "consulta10": #SOMAR COM SET
+     "consulta10": # SUM WITH SET
 '''
 SELECT CT.Nome, COUNT(CT.Nome) AS Numero_de_videos
 FROM Video AS V JOIN
@@ -137,7 +137,7 @@ WHERE CS.Titulo = @Canal_buscado
 GROUP BY CT.Nome
 ORDER BY Numero_de_videos DESC;
 ''',
-     "consulta11": #SOMAR COM SET
+     "consulta11": # SUM WITH SET
 '''
 SELECT T.Pais_Codigo AS Pais, COUNT(CS.Titulo) AS Numero_de_vezes_no_Trend
 FROM Canal_Snapshot AS CS JOIN
@@ -204,7 +204,7 @@ ORDER BY Numero_de_inscritos DESC;
 '''
 }
 
-#opções do select mapeadas para seus respectivos nomes
+# Select options mapped to their respective names
 nome_tabela = {
      "consulta1": "Vídeos em alta de um canal",
      "consulta2": "Vídeos em alta em um país",
@@ -224,12 +224,12 @@ nome_tabela = {
 
 app = Flask(__name__)
 
-#configurações iniciais para funcionamento do banco de dados
+# Initial configurations for database operation
 db_config = {
-    'host': 'localhost',       #Substitua pelo endereço do seu servidor MySQL
-    'user': 'root',     #Substitua pelo seu usuário MySQL
-    'password': 'YuTeJh321',   #Substitua pela sua senha MySQL
-    'database': 'youtube'      #Substitua pelo nome do banco de dados
+    'host': 'localhost',       # MySQL server
+    'user': 'root',            # MySQL user
+    'password': 'YuTeJh321',   # MySQL password
+    'database': 'youtube'      # data bank name
 }
 
 global_xs = None
@@ -237,7 +237,7 @@ global_ys = None
 global_tabela = None
 plt.switch_backend('agg')
 
-#usa a variável global da tabela para separar os valores em duas listas, que se tornam eixos do gráfico a ser plotado
+# Uses the global table variable to separate the values ​​into two lists, which become axes of the graph to be plotted
 def faz_eixos():
      eixo_x = list(global_tabela[0].keys())[0][0:25]
      eixo_y = list(global_tabela[0].keys())[1][0:25]
@@ -245,16 +245,16 @@ def faz_eixos():
      ys = [element[eixo_y] for element in global_tabela]
      return xs, ys
 
-#envia o gráfico gerado no python para a página html
+# Sends the graph generated in python to the html page
 @app.route('/grafico')
 def gera_grafico():
      buf = faz_grafico()
      return send_file(buf, mimetype='image/png')
 
-#usa os eixos feitos pela função faz_eixos() para construir o gráfico da tabela em questão
+# Uses the axes created by the faz_eixos() function to build the graph of the table in question
 def faz_grafico():
      xs, ys = faz_eixos()
-     plt.figure(figsize=(20, 15)) 
+     plt.figure(figsize=(20, 15))
      plt.barh(xs, ys)
      plt.title(f'{list(global_tabela[0].keys())[0]} x {list(global_tabela[0].keys())[1]}')
      plt.xlabel(list(global_tabela[0].keys())[1])
@@ -266,12 +266,12 @@ def faz_grafico():
      plt.close()
      return buf
 
-#renderiza a página do menu
+# render the menu page
 @app.route('/')
 def index():
      return render_template("index.html")
 
-#filtra a consulta apropriada através do input do usuário e então gera o gráfico, se houver
+# Filters the appropriate query through user input and then generates the graph, if any
 @app.route('/consultas', methods=['POST'])
 def processar():
      try:
@@ -300,6 +300,6 @@ def processar():
           return render_template('tabela.html', tabela=tabela, consulta=dado, nome_tabela=nome_tabela[dado])
      except:
           return render_template('tabela.html', tabela=[{}], consulta='', nome_tabela='')
-     
+
 if __name__ == "__main__":
   app.run()

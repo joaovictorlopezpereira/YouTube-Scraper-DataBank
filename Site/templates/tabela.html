@@ -6,40 +6,41 @@
 </head>
 <body>
     <header>
-        <nav><ul>
-            <li id="auto"><a href="../">&#9668; Menu principal</a></li>
+        <nav>
+            <ul>
+                <li id="auto"><a href="../">&#9668; Menu principal</a></li>
             </ul>
         </nav>
     </header>
     <div class="table_box">
-    <h1>{{ nome_tabela }}</h1>
-    {% if consulta in ['consulta3', 'consulta4', 'consulta5', 'consulta6', 'consulta7', 'consulta8', 'consulta9', 'consulta10', 'consulta11', 'consulta13'] %}
-        <a href="../grafico" class="botao-link"> Gerar gráfico </a>
-    {% else %}
-        <a href="../grafico" class="botao-link" style="display: none;"> Gerar gráfico </a>
-    {% endif %}
-    {% if tabela %}
-        <table border="1">
-            <thead>
-                <tr>
-                    {% for chave in tabela[0].keys() %}
-                        <th id="guia">{{ chave.replace('_', " ") }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for linha in tabela %}
+        <h1>{{ nome_tabela }}</h1>
+        {% if consulta in ['consulta3', 'consulta4', 'consulta5', 'consulta6', 'consulta7', 'consulta8', 'consulta9', 'consulta10', 'consulta11', 'consulta13'] %}
+            <a href="../grafico" class="botao-link"> Gerar gráfico </a>
+        {% else %}
+            <a href="../grafico" class="botao-link" style="display: none;"> Gerar gráfico </a>
+        {% endif %}
+        {% if tabela %}
+            <table border="1">
+                <thead>
                     <tr>
-                        {% for valor in linha.values() %}
-                            <td>{{ valor }}</td>
+                        {% for chave in tabela[0].keys() %}
+                            <th id="guia">{{ chave.replace('_', " ") }}</th>
                         {% endfor %}
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>Nenhum resultado encontrado.</p>
-    {% endif %}
+                </thead>
+                <tbody>
+                    {% for linha in tabela %}
+                        <tr>
+                            {% for valor in linha.values() %}
+                                <td>{{ valor }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Nenhum resultado encontrado.</p>
+        {% endif %}
     </div>
 </body>
 </html>

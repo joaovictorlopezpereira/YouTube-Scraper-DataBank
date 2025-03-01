@@ -8,12 +8,14 @@ header {
   background-color: rgb(5, 21, 107);
   color: antiquewhite;
 }
+
 header nav ul {
   display: flex;
   padding: 0;
   margin: 0;
   color: aliceblue;
 }
+
 header nav ul li a {
   margin: 0.5em;
   text-decoration: none;
@@ -24,6 +26,7 @@ header nav ul li a {
   border-radius: 50px;
   transition: background-color 0.2s;
 }
+
 header nav ul li a:hover {
   color: rgb(5, 21, 107);
   background-color: aliceblue;
@@ -56,28 +59,29 @@ td, th {
   white-space: nowrap;
   border-bottom: 1px solid black;
   box-shadow: 2px 2px 10px black;
-  
 }
 
 .botao-link {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #39adc2; 
-  color: white; 
-  text-align: center; 
-  text-decoration: none; 
+  background-color: #39adc2;
+  color: white;
+  text-align: center;
+  text-decoration: none;
   border-radius: 5px;
-  font-size: 16px; 
-  cursor: pointer; 
+  font-size: 16px;
+  cursor: pointer;
   border: 2px solid transparent;
   border-bottom: 5px;
   transition: background-color 0.3s; /
 }
+
 .botao-link:hover {
-  background-color: #33359e; 
+  background-color: #33359e;
 }
+
 .botao-link:active {
-  background-color: #351f96; 
+  background-color: #351f96;
 }
 
 tr:nth-child(even) {
@@ -95,6 +99,7 @@ tr:nth-child(even) {
   background-color: rgb(5, 21, 107);
   letter-spacing: 1px;
 }
+
 #guia p {
   border: none;
   box-shadow: none;

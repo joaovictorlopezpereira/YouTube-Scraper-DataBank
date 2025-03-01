@@ -4,10 +4,10 @@ import time, requests, sys, time, os, argparse
 snippet_features = ["title", "publishedAt", "channelId", "channelTitle", "categoryId"]
 
 # List of features for channel information
-channel_features = ["channel_creation_date", 
-                    "channel_subscriber_count", "channel_video_count", 
-                    "channel_description", "channel_image", "channel_country", 
-                    "channel_total_views", "channel_keywords", 
+channel_features = ["channel_creation_date",
+                    "channel_subscriber_count", "channel_video_count",
+                    "channel_description", "channel_image", "channel_country",
+                    "channel_total_views", "channel_keywords",
                     "channel_url"]
 
 # Any characters to exclude, generally these are things that become problematic in CSV files
@@ -15,15 +15,15 @@ unsafe_characters = ['\n', '"']
 
 # Headers for the CSV
 header = ["video_id"] + snippet_features + ["video_url", "trending_date", "tags", "view_count", "likes",
-                                            "comment_count", "thumbnail_link", "comments_disabled", 
+                                            "comment_count", "thumbnail_link", "comments_disabled",
                                             "ratings_disabled", "description"] + channel_features
 
 '''
-# Gerar colunas dos comentários na sequência correta
+# Generate comment columns in the correct sequence
 for i in range(0):
     header += [f"comment_{i+1}_author", f"comment_{i+1}_content", f"comment_{i+1}_likes"]
 '''
-    
+
 def setup(api_path, code_path):
     with open(api_path, 'r') as file:
         api_key = file.readline().strip()
@@ -60,11 +60,11 @@ def get_channel_data(channel_id):
     except requests.exceptions.RequestException as e:
         print(f"\033[0;31mFailed to fetch channel data for {channel_id}: {e}")
         return ["N/A"] * 10
-    
+
     snippet = channel_data.get("snippet", {})
     statistics = channel_data.get("statistics", {})
     branding = channel_data.get("brandingSettings", {})
-    
+
     # Data points from the API response
     channel_creation_date = snippet.get("publishedAt", "")
     subscriber_count = statistics.get("subscriberCount", "N/A")
@@ -74,11 +74,11 @@ def get_channel_data(channel_id):
     country = snippet.get("country", "N/A")
     total_views = statistics.get("viewCount", "N/A")
     keywords = branding.get("channel", {}).get("keywords", "N/A")
-    
+
     # Default URL: Manually create the standard YouTube channel URL using the channel ID
     channel_url = f"https://www.youtube.com/channel/{channel_id}"
 
-    return [channel_creation_date, subscriber_count, video_count, channel_description, 
+    return [channel_creation_date, subscriber_count, video_count, channel_description,
             channel_image, country, total_views, keywords, channel_url]
 
 '''
@@ -94,7 +94,7 @@ def get_comments(video_id):
     except requests.exceptions.RequestException as e:
         print(f"\033[0;31mFailed to fetch comments for {video_id}: {e}")
         comments = []
-    
+
     comment_data = []
     for comment in comments:
         snippet = comment['snippet']['topLevelComment']['snippet']
@@ -102,11 +102,11 @@ def get_comments(video_id):
         text = snippet.get('textDisplay', '[no comment]')
         like_count = snippet.get('likeCount', 0)
         comment_data.append((author, text, like_count))
-    
+
     # Ensure we always have exactly 5 comments (fill missing ones with default values)
     while len(comment_data) < number_of_comments:
         comment_data.append(("[none]", "[no comment]", 0))
-    
+
     return comment_data
 '''
 
@@ -190,7 +190,7 @@ def get_data():
         write_to_file(country_code, country_data)
 
 if __name__ == "__main__":
-    # Marcar o tempo de início
+    # Set the start time
     start_time = time.time()
 
     parser = argparse.ArgumentParser()
@@ -203,11 +203,11 @@ if __name__ == "__main__":
     api_key, country_codes = setup(args.key_path, args.country_code_path)
     get_data()
 
-    # Marcar o tempo de término
+    # Set the end time
     end_time = time.time()
 
-    # Calcular o tempo total
+    # Calculate total time
     total_time = end_time - start_time
 
-    # Exibir o tempo total formatado em horas, minutos e segundos
+    # Display total time formatted in hours, minutes and seconds
     print(f"\033[0;36mRuntime: {(total_time % 3600) // 60} minutes and {total_time % 60:.2f} seconds\033[m")

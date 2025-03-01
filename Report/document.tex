@@ -1,3 +1,5 @@
+
+%->8-------------------------------------------------------------------------------------------8<-%
 \chapter{Introdução}
 
   O \nonport{website} \nonport{YouTube}, de propriedade da \nonport{Google}, consiste em uma plataforma \nonport{online}
@@ -13,10 +15,13 @@
   Consultas realizadas, assim como a modelagem física em \var{SQL}, a modelagem conceitual e lógica utilizando
   o \var{brModelo}, e a coleta de dados implementada em \var{Python}, podem ser encontrados
   em \cite{our-YoutubeScraperDataBank}.
+%->8-------------------------------------------------------------------------------------------8<-%
 
+
+%->8-------------------------------------------------------------------------------------------8<-%
 \chapter{Datasets}
 
-  Os conjuntos de dados utilizados estão sendo extraídos por meio de um programa em \var{Python} que na verdade é o \href{https://github.com/mitchelljy/Trending-YouTube-Scraper}{\var{YouTube Data Scraper} do usuário \var{mitchelljy}}, publicado em seu \href{https://github.com/mitchelljy}{\nonport{GitHub}}, incrementado com diversas modificações que nos permitem extrair dados públicos de nosso interesse. A chave \href{https://developers.google.com/youtube/v3/docs?hl=pt-br}{\var{YouTube Data API v3}} que está sendo utilizada foi adquirida por meio do \nonport{YouTube} em uma de nossas próprias contas. Os dados extraídos pelo programa são armazenados em arquivos \nonport{CSV} que o próprio programa gera. É importante mencionar que a página de \var{mitchelljy} do \nonport{GitHub} foi encontrada por meio do \nonport{site} \nonport{Kaggle}\cite{kaggle}.
+  Os conjuntos de dados utilizados estão sendo extraídos por meio de um programa em \var{Python} que na verdade é o \href{https://github.com/mitchelljy/Trending-YouTube-Scraper}{\var{YouTube Data Scraper} do usuário \var{mitchelljy}}, publicado em seu \href{https://github.com/mitchelljy}{\nonport{GitHub}}, incrementado com diversas modificações que nos permitem extrair dados públicos de nosso interesse. A chave \href{https://developers.google.com/youtube/v3/docs?hl=pt-br}{\var{YouTube Data API v3}} que está sendo utilizada foi adquirida por meio do \nonport{YouTube} em uma de nossas próprias contas. Os dados extraídos pelo programa são armazenados em arquivos \nonport{CSV} que o próprio programa gera. É importante mencionar que a página de \var{mitchelljy} do \nonport{GitHub} foi encontrada por meio do \nonport{site} \nonport{Kaggle} \cite{kaggle}.
 
   Os dados contidos no \nonport{CSV} e seus respectivos tipos são:
 
@@ -34,7 +39,7 @@
     \item \var{comment\underline{ }count}: novamente, é um campo numérico que retrata a quantidade de comentários que o vídeo recebeu até a captura dos dados. Pertence ao domínio de inteiros longos sem sinal;
     \item \var{thumbnail\underline{ }link}: é a \nonport{URL} da \nonport{thumbnail} (imagem de capa) do vídeo. Por ser um \nonport{link}, que é composto por vários caracteres, alfanuméricos e símbolos especiais, em sequência, escolhemos o tipo \nonport{string} para armazená-los;
     \item \var{comments\underline{ }disabled}: indica se o canal que publicou o vídeo optou por desativar a postagem de comentários. Nos arquivos \nonport{CSV}, esse campo é assinalado por \var{True} ou \var{False}, devendo, evidentemente, ser tratado como um valor de domínio \nonport{booleano};
-    \item \var{ratings\underline{ }disabled}: informa se o canal desativou a opção dos espectadores curtirem (ou descurtirem) o vídeo. Assim como \var{comments\underline{ }disabled}, somente assume valores \var{True} e \var{False} e, por isso, é traduzido para valores do espectro \nonport{booleano};
+    \item \var{ratings\underline{ }disabled}: informa se o canal desativou a opção dos espectadores curtirem (ou \nonport{descurtirem}) o vídeo. Assim como \var{comments\underline{ }disabled}, somente assume valores \var{True} e \var{False} e, por isso, é traduzido para valores do espectro \nonport{booleano};
     \item \var{description}: é a \href{https://developers.google.com/youtube/v3/docs/videos?hl=pt-br#snippet.description}{descrição} do vídeo fornecida pelo seu publicador na língua original. É um texto de tamanho completamente variável (no máximo 5000 caracteres) e pode conter símbolos da codificação \nonport{UTF-8}. Logo, é do tipo \nonport{string}.
     \item \var{channel\underline{ }creation\underline{ }date}: diz respeito à data e hora (no mesmo formato \var{ISO 8601} do campo \var{published\underline{ }at}) de criação do canal que publicou o vídeo. É mapeado no domínio \nonport{DATETIME} do \var{SGBD};
     \item \var{channel\underline{ }subscriber\underline{ }count}: corresponde ao número de inscritos que o canal publicador possui no momento da coleta de dados. Assim como as métricas do vídeo, é um dado altamente mutável e que assume valores inteiros potencialmente grandes. Por esse motivo, optamos por usar o domínio \nonport{BIGINT};
@@ -42,19 +47,18 @@
     \item \var{video\underline{ }url}: condiz com a \nonport{URL} gerada pelo \nonport{YouTube} para o vídeo (que foi discutida na descrição de \var{video\underline{ }id}). É obtida, no código de coleta e organização dos dados, a partir da concatenação da \nonport{URL} padrão para redirecionamento em vídeo com o \nonport{ID} do vídeo. Por corresponder a uma sequência de caracteres, é melhor modelado por uma \nonport{string};
     \item \var{channel\underline{ }description}: refere-se a uma descrição textual do canal dada por seu criador, similar à descrição do vídeo. Escolheu-se o tipo \nonport{TEXT} para armazená-la do banco de dados;
     \item \var{channel\underline{ }image}: relativo ao ícone do canal. Seu formato é de uma \nonport{URL} que redireciona para a imagem em questão. Por isso, decidimos tratar como \nonport{string};
-    \item \var{channel\underline{ }country}: configura o código do país ao qual o canal publicador está associado. É determinado por uma \nonport{string} de exatamente dois caracteres (ou três para \var{N/A}, se o canal não o possui) e \emph{supomos} que equivale ao padrão \href{https://www.iso.org/iso-3166-country-codes.html}{\var{ISO 3166-1}}\cite{iso-3166}
+    \item \var{channel\underline{ }country}: configura o código do país ao qual o canal publicador está associado. É determinado por uma \nonport{string} de exatamente dois caracteres (ou três para \var{N/A}, se o canal não o possui) e \emph{supomos} que equivale ao padrão \href{https://www.iso.org/iso-3166-country-codes.html}{\var{ISO 3166-1}} \cite{iso-3166}.
 
-      (não encontramos evidências explícitas sobre isso na \href{https://developers.google.com/youtube/v3/docs/channels?hl=pt-br#snippet.country}{documentação da \nonport{API}}, apenas conferimos por inspeção). Portanto, é uma \nonport{string} de tamanho máximo 3;
+    (não encontramos evidências explícitas sobre isso na \href{https://developers.google.com/youtube/v3/docs/channels?hl=pt-br#snippet.country}{documentação da \nonport{API}}, apenas conferimos por inspeção). Portanto, é uma \nonport{string} de tamanho máximo 3;
 
     \item \var{channel\underline{ }total\underline{ }views}: relacionado com a quantidade total de visualizações que o canal teve em toda sua história. Como considerável parte dos canais listados dentre os vídeos em alta são de alta relevância, os valores nesse campo são bem grandes e só conseguem ser armazenados se tratados como inteiros longos;
-    \item \var{channel\underline{ }keywords}: é uma lista de palavras-chave escolhidas pelo detentor do canal para facilitar o trabalho de algoritmos de recomendação (assim como as tags dos vídeos). No conjunto de dados gerado, corresponde a uma grande \nonport{string} com as palavras-chave sendo separadas por espaços. Cada palavra-chave é uma \nonport{string} e todas, juntas, \href{https://developers.google.com/youtube/v3/docs/channels?hl=pt-br#brandingSettings.channel.keywords}{podem somar até 500 caracteres}\cite{google_youtube_channels};
+    \item \var{channel\underline{ }keywords}: é uma lista de palavras-chave escolhidas pelo detentor do canal para facilitar o trabalho de algoritmos de recomendação (assim como as tags dos vídeos). No conjunto de dados gerado, corresponde a uma grande \nonport{string} com as palavras-chave sendo separadas por espaços. Cada palavra-chave é uma \nonport{string} e todas, juntas, \href{https://developers.google.com/youtube/v3/docs/channels?hl=pt-br#brandingSettings.channel.keywords}{podem somar até 500 caracteres} \cite{google_youtube_channels};
     \item \var{channel\underline{ }url}: trata-se da \nonport{URL} padrão do canal que postou o vídeo, aquela que o próprio \nonport{YouTube} gera através da concatenação do \nonport{ID} do canal ao esquema genérico de um \nonport{link} para canal (foi exatamente dessa forma que foi modelado no \nonport{script} que fornece o \nonport{dataset}). Guardamos cada valor desse campo em uma \nonport{string}.
-
-
-
-
   \end{itemize}
+%->8-------------------------------------------------------------------------------------------8<-%
 
+
+%->8-------------------------------------------------------------------------------------------8<-%
 \chapter{Projeto do Banco de Dados}
 
 \section{Modelo Conceitual}
@@ -78,7 +82,6 @@
 
   Além disso, colocamos uma observação na modelagem que ``\var{Data em Canal Snapshot se e somente se Data em Video Snapshot}''. Tivemos que colocar essa restrição visto que nossa extração de dados garante que sempre que haja uma instância de \var{Canal Snapshot} com determinada \var{Data}, necessariamente há uma instância de \var{Vídeo Snapshot} com mesma \var{Data} e, analogamente, sempre que haja uma instância de \var{Vídeo Snapshot} com determinada \var{Data}, necessariamente há uma instância de \var{Canal Snapshot} com mesma \var{Data}.
 
-
 \newpage
 \section{Modelo Lógico}
 
@@ -97,142 +100,142 @@
 \section{Modelo Físico}
 \subsection{Criação da Modelagem}
 
-Primeiramente, a modelagem física foi projetada diretamente da lógica, da qual convertemos para a física utilizando a ferramenta presente no próprio \var{brModelo}, fazendo as alterações necessárias conforme fomos verificando os erros da conversão automática. Após isso, para popular o banco de dados, utilizamos o \nonport{CSV} gerado pela \nonport{API}, separando-o em outros \nonport{CSV}s menores que correspondiam a cada tabela (utilizando a biblioteca \var{pandas} da linguagem \var{Python} para tratar o formato dos dados e fazer essa separação), portanto, continham apenas as colunas requeridas por cada uma. Dito isso, foi utilizada uma função de importação, do próprio \var{SQL}, que importa todas as linhas de um \nonport{CSV} para tuplas de uma tabela específica. A seguir, encontra-se o código utilizado para a criação dos esquemas desse banco de dados e como os populamos com os \nonport{CSV}s gerados (junto com o código de criação).
+  Primeiramente, a modelagem física foi projetada diretamente da lógica, da qual convertemos para a física utilizando a ferramenta presente no próprio \var{brModelo}, fazendo as alterações necessárias conforme fomos verificando os erros da conversão automática. Após isso, para popular o banco de dados, utilizamos o \nonport{CSV} gerado pela \nonport{API}, separando-o em outros \nonport{CSV}s menores que correspondiam a cada tabela (utilizando a biblioteca \var{pandas} da linguagem \var{Python} para tratar o formato dos dados e fazer essa separação), portanto, continham apenas as colunas requeridas por cada uma. Dito isso, foi utilizada uma função de importação, do próprio \var{SQL}, que importa todas as linhas de um \nonport{CSV} para tuplas de uma tabela específica. A seguir, encontra-se o código utilizado para a criação dos esquemas desse banco de dados e como os populamos com os \nonport{CSV}s gerados (junto com o código de criação).
 
-\begin{enumerate}
-  \item Tabela \var{Video}
+  \begin{enumerate}
+    \item Tabela \var{Video}
+
+    \begin{code}
+      CREATE TABLE Video (
+        ID CHAR(11) PRIMARY KEY,
+        Canal_ID CHAR(24),
+        Data_hora_de_publicacao DATE,
+        Categoria_ID INT
+      );
+    \end{code}
+
+    A tabela \var{Video} contém informações de cada vídeo, incluindo um identificador único, um campo de identificação para o canal responsável, a data de publicação e a categoria do vídeo.
+
+    \item Tabela \var{Categoria}
+
+    \begin{code}
+      CREATE TABLE Categoria (
+        ID INT PRIMARY KEY,
+        Nome VARCHAR(30)
+      );
+    \end{code}
+
+    A tabela \var{Categoria} armazena as categorias disponíveis, onde cada categoria possui um identificador e um nome. Essa tabela foi populada utilizando um \nonport{CSV} estático que contém todas as categorias possíveis.
+
+    \item Tabela \var{Canal}
+
+    \begin{code}
+      CREATE TABLE Canal (
+        ID CHAR(24) PRIMARY KEY,
+        Data_de_criacao DATE
+      );
+    \end{code}
+
+      A tabela \var{Canal} define os canais existentes, identificados por um \nonport{ID} único e com uma data de criação.
+
+    \item Tabela \var{Pais}
+
+    \begin{code}
+      CREATE TABLE Pais (
+        Codigo VARCHAR(3) PRIMARY KEY
+      );
+    \end{code}
+
+    A tabela \var{Pais} apenas registra os códigos dos países, onde seu código é a chave primária. Inicialmente, tivemos um problema ao converter os valores do \nonport{CSV} para essa tabela, causando comportamentos inesperados no código. Por algum motivo, os campos do \nonport{CSV} não eram lidos com o tipo correto que era previsto, gerando diversos erros ao tentar adicionar chaves estrangeiras para essas tabelas, pois não estava havendo correspondência. Resolvemos, temporariamente, colocando os valores de forma manual nessa tabela.
+
+    Foi necessário um tratamento adicional nos dados, pois, além de vários países duplicados, alguns canais não eram associados com nenhum país. Sendo assim, deixamos os canais sem países associados ao país \var{N/A} por padrão, porque estava havendo erros ao tentar utilizar a chave estrangeira com a tabela \var{Pais}, como já foi dito (e ao adicionar valores \var{NULL}).
+
+    \item Tabela \var{Video\underline{ }Snapshot}
+
+    \begin{code}
+      CREATE TABLE Video_Snapshot (
+        Titulo VARCHAR(100),
+        Numero_de_likes BIGINT,
+        Numero_de_visualizacoes BIGINT,
+        Descricao TEXT,
+        Numero_de_comentarios BIGINT,
+        Data DATE,
+        Video_ID CHAR(11),
+        PRIMARY KEY (Data, Video_ID)
+      );
+    \end{code}
+
+    A tabela \var{Video\underline{ }Snapshot} guarda informações em um certo momento do tempo detalhadas de cada vídeo, como o título, número de likes, visualizações, descrição, número de comentários e a data específica desse instante dos dados, vinculados ao vídeo identificado pelo \nonport{ID} do vídeo. Esta tabela permite o registro de \nonport{snapshots} dos dados de vídeos ao longo do tempo.
+
+    \item Tabela \var{Canal\underline{ }Snapshot}
+
+    \begin{code}
+      CREATE TABLE Canal_Snapshot (
+        Titulo VARCHAR(100),
+        Numero_de_videos INT,
+        Descricao TEXT,
+        Imagem_de_perfil TEXT,
+        Numero_de_visualizacoes BIGINT,
+        Link TEXT,
+        Numero_de_inscritos BIGINT,
+        Data DATE,
+        Canal_ID CHAR(24),
+        Pais_Codigo VARCHAR(3),
+        PRIMARY KEY (Data, Canal_ID)
+      );
+    \end{code}
+
+    De maneira similar à anterior, a tabela \var{Canal\underline{ }Snapshot} armazena \nonport{snapshots} de canais de um certo momento no tempo, com dados sobre título, número de vídeos, descrição, imagem de perfil, visualizações totais, \nonport{link}, número de inscritos, a data da \nonport{snapshot} e o país do canal.
+
+    Também foi necessário um tratamento adicional aqui, pois alguns canais aparecem mais de uma vez de maneira errônea.
+
+    \item Tabela \var{Tag}
+
+    \begin{code}
+      CREATE TABLE Tag (
+        Video_ID CHAR(11) NOT NULL,
+        Tag VARCHAR(500),
+        Video_Snapshot_Data DATE,
+        PRIMARY KEY (Video_ID, Tag, Video_Snapshot_Data)
+      );
+    \end{code}
+
+    A tabela \var{Tag} registra as \nonport{tags} associadas a cada vídeo, e cada linha possui o identificador do vídeo, uma lista das \nonport{tags} e a data do \nonport{snapshot} de vídeo relacionado, permitindo manter as \nonport{tags} de um vídeo em diferentes \nonport{snapshots}. (No código, foi utilizado uma função para lidar com esses campos \nonport{multivalorados}, separando em diversas linhas distintas).
+
+    Nesse caso, tivemos que utilizar a função \var{explode} do \var{pandas} para separar campos \nonport{multivalorados} em diversas linhas
+
+    \item Tabela \var{Palavra\underline{ }chave}
+
+    \begin{code}
+      CREATE TABLE Palavra_chave (
+        Canal_ID CHAR(24) NOT NULL,
+        Palavra_chave VARCHAR(500),
+        Canal_Snapshot_Data DATE,
+        PRIMARY KEY (Canal_ID, Palavra_chave, Canal_Snapshot_Data)
+      );
+    \end{code}
+
+    De modo equivalente, a tabela \var{Palavra\underline{ }chave} armazena palavras-chave de cada canal, relacionadas às datas das \nonport{snapshots} específicas do canal.
+
+    Aqui, tivemos que usar novamente a função para separar um campo \nonport{multivalorado} em diversas outras linhas.
+
+    \item Tabela \var{Trend}
+
+    \begin{code}
+      CREATE TABLE Trend (
+        Pais_Codigo VARCHAR(3),
+        Video_ID CHAR(11),
+        Video_Snapshot_Data DATE,
+        PRIMARY KEY (Pais_Codigo, Video_ID, Video_Snapshot_Data)
+      );
+    \end{code}
+
+    Por fim, a tabela \var{Trend} contém informações sobre as tendências dos vídeos, associadas ao código do país, ao vídeo e ao snapshot de vídeo de uma data específica.
+  \end{enumerate}
+
+  Depois da declaração dos esquemas, foi feito a declaração das chaves estrangeiras de acordo com o planejado no modelo lógico, ficando:
 
   \begin{code}
-    CREATE TABLE Video (
-      ID CHAR(11) PRIMARY KEY,
-      Canal_ID CHAR(24),
-      Data_hora_de_publicacao DATE,
-      Categoria_ID INT
-    );
-  \end{code}
-
-  A tabela \var{Video} contém informações de cada vídeo, incluindo um identificador único, um campo de identificação para o canal responsável, a data de publicação e a categoria do vídeo.
-
-  \item Tabela \var{Categoria}
-
-  \begin{code}
-    CREATE TABLE Categoria (
-      ID INT PRIMARY KEY,
-      Nome VARCHAR(30)
-    );
-  \end{code}
-
-  A tabela \var{Categoria} armazena as categorias disponíveis, onde cada categoria possui um identificador e um nome. Essa tabela foi populada utilizando um \nonport{CSV} estático que contém todas as categorias possíveis.
-
-  \item Tabela \var{Canal}
-
-  \begin{code}
-    CREATE TABLE Canal (
-      ID CHAR(24) PRIMARY KEY,
-      Data_de_criacao DATE
-    );
-  \end{code}
-
-    A tabela \var{Canal} define os canais existentes, identificados por um \nonport{ID} único e com uma data de criação.
-
-  \item Tabela \var{Pais}
-
-  \begin{code}
-    CREATE TABLE Pais (
-      Codigo VARCHAR(3) PRIMARY KEY
-    );
-  \end{code}
-
-  A tabela \var{Pais} apenas registra os códigos dos países, onde seu código é a chave primária. Inicialmente, tivemos um problema ao converter os valores do \nonport{CSV} para essa tabela, causando comportamentos inesperados no código. Por algum motivo, os campos do \nonport{CSV} não eram lidos com o tipo correto que era previsto, gerando diversos erros ao tentar adicionar chaves estrangeiras para essas tabelas, pois não estava havendo correspondência. Resolvemos, temporariamente, colocando os valores de forma manual nessa tabela.
-
-  Foi necessário um tratamento adicional nos dados, pois, além de vários países duplicados, alguns canais não eram associados com nenhum país. Sendo assim, deixamos os canais sem países associados ao país \var{N/A} por padrão, porque estava havendo erros ao tentar utilizar a chave estrangeira com a tabela \var{Pais}, como já foi dito (e ao adicionar valores \var{NULL}).
-
-  \item Tabela \var{Video\underline{ }Snapshot}
-
-  \begin{code}
-    CREATE TABLE Video_Snapshot (
-      Titulo VARCHAR(100),
-      Numero_de_likes BIGINT,
-      Numero_de_visualizacoes BIGINT,
-      Descricao TEXT,
-      Numero_de_comentarios BIGINT,
-      Data DATE,
-      Video_ID CHAR(11),
-      PRIMARY KEY (Data, Video_ID)
-    );
-  \end{code}
-
-  A tabela \var{Video\underline{ }Snapshot} guarda informações em um certo momento do tempo detalhadas de cada vídeo, como o título, número de likes, visualizações, descrição, número de comentários e a data específica desse instante dos dados, vinculados ao vídeo identificado pelo \nonport{ID} do vídeo. Esta tabela permite o registro de \nonport{snapshots} dos dados de vídeos ao longo do tempo.
-
-  \item Tabela \var{Canal\underline{ }Snapshot}
-
-  \begin{code}
-    CREATE TABLE Canal_Snapshot (
-      Titulo VARCHAR(100),
-      Numero_de_videos INT,
-      Descricao TEXT,
-      Imagem_de_perfil TEXT,
-      Numero_de_visualizacoes BIGINT,
-      Link TEXT,
-      Numero_de_inscritos BIGINT,
-      Data DATE,
-      Canal_ID CHAR(24),
-      Pais_Codigo VARCHAR(3),
-      PRIMARY KEY (Data, Canal_ID)
-    );
-  \end{code}
-
-  De maneira similar à anterior, a tabela \var{Canal\underline{ }Snapshot} armazena \nonport{snapshots} de canais de um certo momento no tempo, com dados sobre título, número de vídeos, descrição, imagem de perfil, visualizações totais, \nonport{link}, número de inscritos, a data da \nonport{snapshot} e o país do canal.
-
-  Também foi necessário um tratamento adicional aqui, pois alguns canais aparecem mais de uma vez de maneira errônea.
-
-  \item Tabela \var{Tag}
-
-  \begin{code}
-    CREATE TABLE Tag (
-      Video_ID CHAR(11) NOT NULL,
-      Tag VARCHAR(500),
-      Video_Snapshot_Data DATE,
-      PRIMARY KEY (Video_ID, Tag, Video_Snapshot_Data)
-    );
-  \end{code}
-
-  A tabela \var{Tag} registra as \nonport{tags} associadas a cada vídeo, e cada linha possui o identificador do vídeo, uma lista das \nonport{tags} e a data do \nonport{snapshot} de vídeo relacionado, permitindo manter as \nonport{tags} de um vídeo em diferentes \nonport{snapshots}. (No código, foi utilizado uma função para lidar com esses campos multivalorados, separando em diversas linhas distintas).
-
-  Nesse caso, tivemos que utilizar a função \var{explode} do \var{pandas} para separar campos multivalorados em diversas linhas
-
-  \item Tabela \var{Palavra\underline{ }chave}
-
-  \begin{code}
-    CREATE TABLE Palavra_chave (
-      Canal_ID CHAR(24) NOT NULL,
-      Palavra_chave VARCHAR(500),
-      Canal_Snapshot_Data DATE,
-      PRIMARY KEY (Canal_ID, Palavra_chave, Canal_Snapshot_Data)
-    );
-  \end{code}
-
-  De modo equivalente, a tabela \var{Palavra\underline{ }chave} armazena palavras-chave de cada canal, relacionadas às datas das \nonport{snapshots} específicas do canal.
-
-  Aqui, tivemos que usar novamente a função para separar um campo multivalorado em diversas outras linhas.
-
-  \item Tabela \var{Trend}
-
-  \begin{code}
-    CREATE TABLE Trend (
-      Pais_Codigo VARCHAR(3),
-      Video_ID CHAR(11),
-      Video_Snapshot_Data DATE,
-      PRIMARY KEY (Pais_Codigo, Video_ID, Video_Snapshot_Data)
-    );
-  \end{code}
-
-  Por fim, a tabela \var{Trend} contém informações sobre as tendências dos vídeos, associadas ao código do país, ao vídeo e ao snapshot de vídeo de uma data específica.
-\end{enumerate}
-
-Depois da declaração dos esquemas, foi feito a declaração das chaves estrangeiras de acordo com o planejado no modelo lógico, ficando:
-
-\begin{code}
 ALTER TABLE Video ADD CONSTRAINT FK_Video_Canal_ID
   FOREIGN KEY (Canal_ID)
   REFERENCES Canal (ID)
@@ -294,168 +297,168 @@ ALTER TABLE Trend ADD CONSTRAINT FK_Trend_Video_Snapshot_Data
   FOREIGN KEY (Video_Snapshot_Data)
   REFERENCES Video_Snapshot (Data)
   ON DELETE RESTRICT;
-\end{code}
+  \end{code}
 
 \subsection{Evidência de População do Banco de Dados}
 
-Como evidência de criação e população do banco, segue capturas de telas das seguintes consultas:
+  Como evidência de criação e população do banco, segue capturas de telas das seguintes consultas:
 
 \subsubsection{Canal}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[b]{0.25\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{canal.jpg}
-      \caption{Contador de \var{Canal}.}
-  \end{minipage}
-  \hspace{0.05\textwidth}
-  \begin{minipage}[b]{0.6\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{canal2.jpg}
-      \caption{Exemplo de dados relativos a \var{canal}.}
-  \end{minipage}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{canal.jpg}
+        \caption{Contador de \var{Canal}.}
+    \end{minipage}
+    \hspace{0.05\textwidth}
+    \begin{minipage}[b]{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{canal2.jpg}
+        \caption{Exemplo de dados relativos a \var{canal}.}
+    \end{minipage}
+  \end{figure}
 
 \subsubsection{Canal Snapshot}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[b]{0.25\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{canal-snap.jpg}
-      \caption{Contador de \var{Canal\underline{ }Snapshot}.}
-  \end{minipage}
-  \hspace{0.05\textwidth}
-  \begin{minipage}[b]{0.6\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{canal-snap3.jpg}
-      \caption{Exemplo de dados relativos a \var{Canal\underline{ }Snapshot}.}
-  \end{minipage}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{canal-snap.jpg}
+        \caption{Contador de \var{Canal\underline{ }Snapshot}.}
+    \end{minipage}
+    \hspace{0.05\textwidth}
+    \begin{minipage}[b]{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{canal-snap3.jpg}
+        \caption{Exemplo de dados relativos a \var{Canal\underline{ }Snapshot}.}
+    \end{minipage}
+  \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\textwidth]{canal-snap2.jpg}
-  \caption{Exemplo de dados relativos a \var{Canal\underline{ }Snapshot}.}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{canal-snap2.jpg}
+    \caption{Exemplo de dados relativos a \var{Canal\underline{ }Snapshot}.}
+  \end{figure}
 
 \subsubsection{Categoria}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[b]{0.25\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{categorias.jpg}
-      \caption{Contador de \var{Categoria}.}
-  \end{minipage}
-  \hspace{0.05\textwidth}
-  \begin{minipage}[b]{0.6\textwidth}
-      \centering
-      \includegraphics[width=0.4\textwidth]{categorias2.jpg}
-      \caption{Exemplo de dados relativos a \var{Categoria}.}
-  \end{minipage}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{categorias.jpg}
+        \caption{Contador de \var{Categoria}.}
+    \end{minipage}
+    \hspace{0.05\textwidth}
+    \begin{minipage}[b]{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth]{categorias2.jpg}
+        \caption{Exemplo de dados relativos a \var{Categoria}.}
+    \end{minipage}
+  \end{figure}
 
 \subsubsection{Pais}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[b]{0.25\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{pais.jpg}
-      \caption{Contador de \var{Pais}.}
-  \end{minipage}
-  \hspace{0.05\textwidth}
-  \begin{minipage}[b]{0.6\textwidth}
-      \centering
-      \includegraphics[width=0.2\textwidth]{pais2.jpg}
-      \caption{Exemplo de dados relativos a \var{Pais}.}
-  \end{minipage}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pais.jpg}
+        \caption{Contador de \var{Pais}.}
+    \end{minipage}
+    \hspace{0.05\textwidth}
+    \begin{minipage}[b]{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.2\textwidth]{pais2.jpg}
+        \caption{Exemplo de dados relativos a \var{Pais}.}
+    \end{minipage}
+  \end{figure}
 
 \subsubsection{Palavra Chave}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[b]{0.25\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{palavra-chave.jpg}
-      \caption{Contador de \var{Palavra\underline{ }Chave}.}
-  \end{minipage}
-  \hspace{0.05\textwidth}
-  \begin{minipage}[b]{0.6\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{palavra-chave2.jpg}
-      \caption{Exemplo de dados relativos a \var{Palavra\underline{ }Chave}.}
-  \end{minipage}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{palavra-chave.jpg}
+        \caption{Contador de \var{Palavra\underline{ }Chave}.}
+    \end{minipage}
+    \hspace{0.05\textwidth}
+    \begin{minipage}[b]{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{palavra-chave2.jpg}
+        \caption{Exemplo de dados relativos a \var{Palavra\underline{ }Chave}.}
+    \end{minipage}
+  \end{figure}
 
 \subsubsection{Tag}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[b]{0.25\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{tag.jpg}
-      \caption{Contador de \var{Tag}.}
-  \end{minipage}
-  \hspace{0.05\textwidth}
-  \begin{minipage}[b]{0.6\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{tag2.jpg}
-      \caption{Exemplo de dados relativos a \var{Tag}.}
-  \end{minipage}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{tag.jpg}
+        \caption{Contador de \var{Tag}.}
+    \end{minipage}
+    \hspace{0.05\textwidth}
+    \begin{minipage}[b]{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{tag2.jpg}
+        \caption{Exemplo de dados relativos a \var{Tag}.}
+    \end{minipage}
+  \end{figure}
 
 \subsubsection{Trend}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[b]{0.25\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{trend.jpg}
-      \caption{Contador de \var{Trend}.}
-  \end{minipage}
-  \hspace{0.05\textwidth}
-  \begin{minipage}[b]{0.6\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{trend2.jpg}
-      \caption{Exemplo de dados relativos a \var{Trend}.}
-  \end{minipage}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{trend.jpg}
+        \caption{Contador de \var{Trend}.}
+    \end{minipage}
+    \hspace{0.05\textwidth}
+    \begin{minipage}[b]{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{trend2.jpg}
+        \caption{Exemplo de dados relativos a \var{Trend}.}
+    \end{minipage}
+  \end{figure}
 
 \subsubsection{Video}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[b]{0.25\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{video.jpg}
-      \caption{Contador de \var{Video}.}
-  \end{minipage}
-  \hspace{0.05\textwidth}
-  \begin{minipage}[b]{0.6\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{video2.jpg}
-      \caption{Exemplo de dados relativos a \var{Video}.}
-  \end{minipage}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.25\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{video.jpg}
+        \caption{Contador de \var{Video}.}
+    \end{minipage}
+    \hspace{0.05\textwidth}
+    \begin{minipage}[b]{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{video2.jpg}
+        \caption{Exemplo de dados relativos a \var{Video}.}
+    \end{minipage}
+  \end{figure}
 
 \subsubsection{Video Snapshot}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.25\textwidth]{video-snap.jpg}
-  \caption{Contador de \var{Video\underline{ }Snapshot}.}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{video-snap.jpg}
+    \caption{Contador de \var{Video\underline{ }Snapshot}.}
+  \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\textwidth]{video-snap2.jpg}
-  \caption{Exemplo de dados relativos a \var{Video\underline{ }Snapshot}.}
-\end{figure}
-\section{Consultas}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{video-snap2.jpg}
+    \caption{Exemplo de dados relativos a \var{Video\underline{ }Snapshot}.}
+  \end{figure}
+  \section{Consultas}
 
 \subsection{Views Auxiliares}
 
@@ -492,7 +495,7 @@ GROUP BY C.ID, UAVP.Pais_Codigo;
 
   Essa consulta exibe, em ordem decrescente, os canais que mais apareceram em alta e a quantidade de vezes que isso aconteceu. Consideramos como aparição cada ocorrência de um vídeo do canal na seção de vídeos em alta de um país em uma data.
 
-\begin{code}
+  \begin{code}
 SELECT CS.Titulo AS Canal, COUNT(CS.Canal_ID) AS Numero_de_aparicoes
 FROM Trend AS T JOIN
     Video_Snapshot AS VS ON T.Video_ID = VS.Video_ID AND
@@ -503,57 +506,57 @@ FROM Trend AS T JOIN
                       VS.Data = CS.Data
 GROUP BY CS.Titulo
 ORDER BY Numero_de_aparicoes DESC;
-\end{code}
+  \end{code}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.5\textwidth]{consulta (1).jpg}
-  \caption{Primeira consulta.}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{consulta (1).jpg}
+    \caption{Primeira consulta.}
+  \end{figure}
 
 \subsection{Segunda Consulta}
 
   A seguinte consulta exibe, em ordem decrescente, o número de vezes que uma tag apareceu em algum vídeo em alta. Consideramos como aparição cada ocorrência de uma tag em um vídeo na seção de vídeos em alta de um país em uma data.
 
-\begin{code}
+  \begin{code}
 SELECT Tag, COUNT(Tag) AS Numero_de_usos
 FROM Ultima_aparicao_video_pais AS UAVP JOIN
     Tag AS T ON UAVP.Video_ID = T.Video_ID AND
           UAVP.Ultima_data = T.Video_Snapshot_Data
 GROUP BY Tag
 ORDER BY Numero_de_usos DESC;
-\end{code}
+  \end{code}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{consulta (2).jpg}
-  \caption{Segunda consulta.}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{consulta (2).jpg}
+    \caption{Segunda consulta.}
+  \end{figure}
 
 \subsection{Terceira Consulta}
 
   Essa consulta exibe, em ordem decrescente, o número de vezes que uma palavra-chave apareceu em algum canal em alta. Consideramos como aparição cada ocorrência de uma palavra-chave em um canal para cada vídeo seu em alta em um país em uma data.
 
-\begin{code}
+  \begin{code}
 SELECT Palavra_chave, COUNT(Palavra_chave) AS Numero_de_usos
 FROM Ultima_aparicao_canal_pais AS UACP JOIN
     Palavra_chave AS PC ON UACP.Canal_ID = PC.Canal_ID AND
                   UACP.Ultima_data = PC.Canal_Snapshot_Data
 GROUP BY Palavra_chave
 ORDER BY Numero_de_usos DESC;
-\end{code}
+  \end{code}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{consulta (3).jpg}
-  \caption{Terceira consulta.}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{consulta (3).jpg}
+    \caption{Terceira consulta.}
+  \end{figure}
 
 \subsection{Quarta Consulta}
 
   Essa consulta apresenta cada país e o número de vezes que um canal sediado apareceu em alta. Consideramos como aparição cada ocorrência de canal sediado no país para cada vídeo seu em alta em um país em uma data.
 
-\begin{code}
+  \begin{code}
 WITH
   Paises_em_alta AS
     (SELECT P.Codigo, CS.Canal_ID
@@ -573,19 +576,19 @@ WITH
  FROM Paises_em_alta
  WHERE Codigo IS NULL)
 ORDER BY Numero_de_aparicoes DESC;
-\end{code}
+  \end{code}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{consulta (4).jpg}
-  \caption{Quarta consulta.}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{consulta (4).jpg}
+    \caption{Quarta consulta.}
+  \end{figure}
 
 \subsection{Quinta Consulta}
 
   Essa consulta exibe, em ordem decrescente de total de visualizações, os canais que mais tiveram visualizações em seus vídeos em alta durante o período de coleta.
 
-\begin{code}
+  \begin{code}
 WITH
   Video_mais_recente AS
     (SELECT V.ID, V.Canal_ID, VS.Numero_de_visualizacoes
@@ -599,13 +602,13 @@ FROM (SELECT Canal_ID, SUM(Numero_de_visualizacoes) AS Total_de_visualizacoes
       GROUP BY Canal_ID) AS VR JOIN
     Canal_Snapshot AS CS USING (Canal_ID)
 ORDER BY VR.Total_de_visualizacoes DESC;
-\end{code}
+  \end{code}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{consulta (5).jpg}
-  \caption{Quinta consulta.}
-\end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{consulta (5).jpg}
+    \caption{Quinta consulta.}
+  \end{figure}
 
 \subsection{Consultas Adicionais}
 
@@ -626,7 +629,10 @@ ORDER BY VR.Total_de_visualizacoes DESC;
   \end{itemize}
 
   Dessa maneira, foi implementado um total de 14 consultas distintas sobre os dados.
+%->8-------------------------------------------------------------------------------------------8<-%
 
+
+%->8-------------------------------------------------------------------------------------------8<-%
 \chapter{Aplicação}
 
   A aplicação desenvolvida consiste de três componentes principais: o \emph{front-end} construído com
@@ -659,62 +665,38 @@ ORDER BY VR.Total_de_visualizacoes DESC;
     \includegraphics[width=0.8\textwidth]{app-grafico.png}
     \caption{Dados em gráfico.}
   \end{figure}
+%->8-------------------------------------------------------------------------------------------8<-%
 
+
+%->8-------------------------------------------------------------------------------------------8<-%
 \chapter{Distribuição do Trabalho}
 
-  Inicialmente, os membros do grupo se reuniram para debater a modelagem conceitual para o tema proposto e, após diversos
-  protótipos, foi encontrada uma solução plausível para a modelagem. Em seguida, João Victor tratou da implementação do
-  modelo conceitual no \var{brModelo}.
+  Inicialmente, os membros do grupo se reuniram para debater a modelagem conceitual para o tema proposto e, após diversos protótipos, foi encontrada uma solução plausível para a modelagem. Em seguida, João Victor tratou da implementação do modelo conceitual no \var{brModelo}.
 
   No entanto, após a rodada inicial de apresentações,
-  se tornou evidente por meio do \nonport{feedback} obtido que a modelagem conceitual apresentada não considerava adequadamente
-  certas particularidades sobre a temporalidade dos dados. João Victor, William Victor e Gustavo se reuniram novamente em busca de
-  uma modelagem alternativa, e, após algumas propostas analisadas, Gustavo sugeriu a divisão das entidades utilizando o conceito
-  de \nonport{Snapshot} para separar dados temporais de dados atemporais (fixos para uma certa entidade ao longo do tempo),
-  o que permitiu uma modelagem coerente com a complexidade dos dados.
+  se tornou evidente por meio do \nonport{feedback} obtido que a modelagem conceitual apresentada não considerava adequadamente certas particularidades sobre a temporalidade dos dados. João Victor, William Victor e Gustavo se reuniram novamente em busca de uma modelagem alternativa, e, após algumas propostas analisadas, Gustavo sugeriu a divisão das entidades utilizando o conceito de \nonport{Snapshot} para separar dados temporais de dados atemporais (fixos para uma certa entidade ao longo do tempo), o que permitiu uma modelagem coerente com a complexidade dos dados.
 
-  Então, João Victor, junto de William Victor, realizaram a conversão para o modelo lógico e, em seguida, para o modelo
-  físico. De forma quase assíncrona, Yuri e William Victor implementaram o programa que extraísse e tratasse os dados do
+  Então, João Victor, junto de William Victor, realizaram a conversão para o modelo lógico e, em seguida, para o modelo físico. De forma quase assíncrona, Yuri e William Victor implementaram o programa que extraísse e tratasse os dados do
   \nonport{YouTube}.
 
-  A idealização das consultas que seriam realizadas, assim como a sua implementação utilizando \nonport{queries} \var{MySQL},
-  foi realizada por William Victor. Também foi sua contribuição o estabelecimento de \nonport{views} básicas, a partir das quais
-  \nonport{queries} mais complexas poderiam ser construídas, minimizando a complexidade individual de cada consulta.
+  A idealização das consultas que seriam realizadas, assim como a sua implementação utilizando \nonport{queries} \var{MySQL}, foi realizada por William Victor. Também foi sua contribuição o estabelecimento de \nonport{views} básicas, a partir das quais \nonport{queries} mais complexas poderiam ser construídas, minimizando a complexidade individual de cada consulta.
 
-  A respeito da implementação \nonport{Web}, em primeira instância, o grupo se reuniu para discutir os detalhes da aplicação
-  e decidir pequenos detalhes. Inicialmente, havia a ideia de pré-computar as consultas necessárias, de modo a simplificar
-  grandemente a implementação da aplicação, que poderia ser estática, requisitando arquivos \nonport{CSV} com os dados de um
-  repositório no \nonport{GitHub}. No entanto, ao compreender que isso inviabilizaria o desenvolvimento de consultas dinâmicas,
-  e possivelmente não se adequaria aos requisitos do trabalho, o grupo decidiu rever a arquitetura da aplicação.
+  A respeito da implementação \nonport{Web}, em primeira instância, o grupo se reuniu para discutir os detalhes da aplicação e decidir pequenos detalhes. Inicialmente, havia a ideia de pré-computar as consultas necessárias, de modo a simplificar grandemente a implementação da aplicação, que poderia ser estática, requisitando arquivos \nonport{CSV} com os dados de um repositório no \nonport{GitHub}. No entanto, ao compreender que isso inviabilizaria o desenvolvimento de consultas dinâmicas, e possivelmente não se adequaria aos requisitos do trabalho, o grupo decidiu rever a arquitetura da aplicação.
 
-  O uso da ferramenta \var{Flask} foi indicado por Gustavo, de modo inspirado por arquivos de instruções auxiliares
-  disponibilizados no mural da disciplina no \nonport{Google Classroom}. Gustavo auxiliou então Yuri na especificação da
-  arquitetura da aplicação \nonport{Web}, determinando as maneiras que o \nonport{front-end} se comunicaria com o
-  \nonport{back-end} e, por sua vez, como o \nonport{back-end} se comunicaria com o banco de dados.
-  Os códigos \var{HTML}, \var{CSS} e \var{JavaScript} foram escritos por Yuri.
+  O uso da ferramenta \var{Flask} foi indicado por Gustavo, de modo inspirado por arquivos de instruções auxiliares disponibilizados no mural da disciplina no \nonport{Google Classroom}. Gustavo auxiliou então Yuri na especificação da arquitetura da aplicação \nonport{Web}, determinando as maneiras que o \nonport{front-end} se comunicaria com o
+  \nonport{back-end} e, por sua vez, como o \nonport{back-end} se comunicaria com o banco de dados. Os códigos \var{HTML}, \var{CSS} e \var{JavaScript} foram escritos por Yuri.
 
-  Sobre esse documento: os capítulos 1 e 2 foram escritos por William Victor e Yuri.
-  O capítulo 3 foi escrito por João Victor.
-  O capítulo 4 foi escrito por Gustavo, e os capítulos 5 e 6 escritos inicialmente por João Victor,
-  sendo depois revistos e estendidos por Gustavo.
+  Sobre esse documento: os capítulos 1 e 2 foram escritos por William Victor e Yuri. O capítulo 3 foi escrito por João Victor. O capítulo 4 foi escrito por Gustavo, e os capítulos 5 e 6 escritos inicialmente por João Victor, sendo depois revistos e estendidos por Gustavo.
 
-  Todos os capítulos desse documento sofreram atualizações conforme o desenvolvimento do trabalho. A confecção, padronização
-  e formatação do documento foi feita por João Victor e Gustavo.
+  Todos os capítulos desse documento sofreram atualizações conforme o desenvolvimento do trabalho. A confecção, padronização e formatação do documento foi feita por João Victor e Gustavo.
+%->8-------------------------------------------------------------------------------------------8<-%
 
+
+%->8-------------------------------------------------------------------------------------------8<-%
 \chapter{Considerações Finais}
 
-  Este trabalho, apresentado como projeto final de disciplina de Banco de Dados, criou um contexto interessante no qual
-  aplicar aquilo que estudamos ao longo de um semestre e desenvolver habilidades complementares.
-  Descobrimos como interagir com a \nonport{API} do \nonport{YouTube}, escrevemos \nonport{scripts} para consulta, executados diariamente
-  por um período de aproximadamente um mês para a coleta dos dados, selecionamos e tratamos as informações,
-  populamos um banco de dados \var{MySQL} e escrevemos um servidor para uma aplicação \nonport{Web} que acessa e exibe
-  as estatísticas coletadas.
+  Este trabalho, apresentado como projeto final de disciplina de Banco de Dados, criou um contexto interessante no qual aplicar aquilo que estudamos ao longo de um semestre e desenvolver habilidades complementares. Descobrimos como interagir com a \nonport{API} do \nonport{YouTube}, escrevemos \nonport{scripts} para consulta, executados diariamente por um período de aproximadamente um mês para a coleta dos dados, selecionamos e tratamos as informações, populamos um banco de dados \var{MySQL} e escrevemos um servidor para uma aplicação \nonport{Web} que acessa e exibe as estatísticas coletadas.
 
-  Cada uma das etapas acima trouxe impedimentos de natureza conceitual e de implementação, que precisaram ser superados pelo
-  grupo. Levando em conta que nenhum dos seus
-  integrantes havia experiência prévia com bancos de dados ou desenvolvimento \nonport{Web}, e, visto que conseguimos
-  de forma satisfatória realizar a coleta de dados e, afinal, efetuar consultas dinâmicas ao banco por meio da aplicação,
-  concluímos que o resultado alcançado atendeu às expectativas.
+  Cada uma das etapas acima trouxe impedimentos de natureza conceitual e de implementação, que precisaram ser superados pelo grupo. Levando em conta que nenhum dos seus integrantes havia experiência prévia com bancos de dados ou desenvolvimento \nonport{Web}, e, visto que conseguimos de forma satisfatória realizar a coleta de dados e, afinal, efetuar consultas dinâmicas ao banco por meio da aplicação, concluímos que o resultado alcançado atendeu às expectativas.
 
   Em resumo, dado o objetivo inicial do projeto, concordamos que o resultado alcançado foi um sucesso.
-

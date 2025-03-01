@@ -10,12 +10,14 @@ header {
   min-width: 1060px;
   background-color: rgb(5, 21, 107);
 }
+
 header nav ul {
   display: flex;
   padding: 0;
   margin: 0;
   color: aliceblue;
 }
+
 header nav ul li a {
   margin: 0.5em;
   text-decoration: none;
@@ -26,9 +28,11 @@ header nav ul li a {
   border-radius: 50px;
   transition: background-color 0.2s;
 }
+
 header nav ul li a:visited {
   color: aliceblue;
 }
+
 header nav ul li a:hover {
   color: rgb(5, 21, 107);
   background-color: aliceblue;
@@ -86,9 +90,11 @@ button {
   border-bottom: 5px;
   transition: background-color 0.3s; /* Efeito de transição */
 }
+
 button:hover {
   background-color: #33359e; /* Cor do botão quando passa o mouse */
 }
+
 button:active {
   background-color: #351f96; /* Cor do botão quando clicado */
 }
